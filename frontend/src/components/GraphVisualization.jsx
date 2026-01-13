@@ -374,6 +374,9 @@ function GraphVisualization({ data, searchQuery = null }) {
             enableZoomInteraction={true}
             d3AlphaDecay={0.0228}
             d3VelocityDecay={0.4}
+            nodeRelSize={6}
+            minZoom={0.1}
+            maxZoom={4}
           />
         )}
       </div>
