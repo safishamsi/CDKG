@@ -8,6 +8,7 @@ venv/
 env/
 ENV/
 .venv
+*.egg-info/
 
 # Node
 node_modules/
@@ -19,27 +20,53 @@ yarn-error.log*
 # Build outputs
 dist/
 build/
-*.egg-info/
+frontend/dist/
+frontend/build/
 
 # Environment
 .env
 .env.local
+.env.production.local
+.env.development.local
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
 
 # OS
 .DS_Store
 Thumbs.db
+*.log
 
-# Data
+# Data & Large Files
 *.db
 *.sqlite
-
-# Embeddings (large files)
+*.npy
+*.bin
 embeddings/*.npy
 embeddings/*.bin
 !embeddings/README.md
+!embeddings/*.json
+
+# YouTube processing
+youtube_audio/
+youtube_downloads/
+youtube_transcripts/
+youtube_monitor_state.json
+
+# Test files (keep structure but ignore outputs)
+*.test.py
+test_outputs/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Large transcript files (optional - uncomment if you want to exclude)
+# Transcripts/
