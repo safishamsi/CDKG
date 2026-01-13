@@ -53,14 +53,28 @@ export const getGraphData = async (query = null, limit = 100, depth = 2) => {
     if (query) {
       params.query = query
     }
+    console.log('🔍 Fetching graph data:', { query, limit, depth, baseURL: API_BASE_URL })
     const response = await api.get('/api/graph', { params })
+    console.log('✅ Graph API response received:', {
+      status: response.status,
+      hasNodes: !!response.data?.nodes,
+      nodesCount: response.data?.nodes?.length || 0,
+      linksCount: response.data?.links?.length || 0
+    })
     return response.data
   } catch (error) {
-    console.error('Graph data fetch failed:', error)
+    console.error('❌ Graph data fetch failed:', error)
+    console.error('Error details:', {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      url: error.config?.url,
+      baseURL: API_BASE_URL
+    })
     throw new Error(
       error.response?.data?.detail || 
       error.message || 
-      'Failed to fetch graph data'
+      `Failed to fetch graph data from ${API_BASE_URL}. Check if backend is running and VITE_API_URL is set correctly.`
     )
   }
 }

@@ -97,10 +97,21 @@ function GraphVisualization({ data, searchQuery = null }) {
           })
         } else {
           console.warn('No graph data received:', result)
-          console.log('API Response:', JSON.stringify(result, null, 2))
+          console.log('Full API Response:', JSON.stringify(result, null, 2))
+          
+          // Check if result exists but has empty nodes array
+          if (result && Array.isArray(result.nodes) && result.nodes.length === 0) {
+            setError(`API returned empty nodes array. Total nodes in DB: ${result.total_nodes || 0}, Total links: ${result.total_links || 0}. Try increasing the limit or checking filters.`)
+          } else if (result && !result.nodes) {
+            setError(`API response missing 'nodes' field. Response keys: ${Object.keys(result).join(', ')}`)
+          } else if (!result) {
+            setError('Empty response from API. Check if backend is running and VITE_API_URL is set correctly.')
+          } else {
+            setError('No nodes found in response. Check backend logs.')
+          }
+          
           // Set empty data if no results
           setGraphData({ nodes: [], links: [] })
-          setError(result ? 'No nodes found in response' : 'Empty response from API')
         }
       } catch (error) {
         console.error('Failed to load graph data:', error)
