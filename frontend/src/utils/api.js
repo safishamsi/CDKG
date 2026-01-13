@@ -2,11 +2,14 @@ import axios from 'axios'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
+console.log('🔗 API Base URL:', API_BASE_URL)
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 30000, // 30 second timeout
 })
 
 export const queryAPI = async (query, maxHops = 2, conversationHistory = []) => {

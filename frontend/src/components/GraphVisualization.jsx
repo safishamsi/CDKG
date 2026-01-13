@@ -89,14 +89,21 @@ function GraphVisualization({ data, searchQuery = null }) {
           })
         } else {
           console.warn('No graph data received:', result)
+          console.log('API Response:', JSON.stringify(result, null, 2))
           // Set empty data if no results
           setGraphData({ nodes: [], links: [] })
-          setError(null)
+          setError(result ? 'No nodes found in response' : 'Empty response from API')
         }
       } catch (error) {
         console.error('Failed to load graph data:', error)
+        console.error('Error details:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status,
+          url: error.config?.url
+        })
         setGraphData({ nodes: [], links: [] })
-        setError(error.message || 'Failed to load graph data. Check if backend is running.')
+        setError(error.message || 'Failed to load graph data. Check if backend is running and VITE_API_URL is set correctly.')
         // Don't show alert, show error in UI instead
       } finally {
         setLoading(false)
