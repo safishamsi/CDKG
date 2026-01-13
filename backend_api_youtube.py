@@ -508,22 +508,28 @@ async def get_graph_data(
                 result = session.run(cypher_query, query=query, limit=limit)
             else:
                 # General graph: get a sample of nodes and relationships
-                # First try to get relationships, then fallback to just nodes
                 cypher_query = """
                 MATCH (n)-[r]->(m)
-                RETURN n, labels(n)[0] as n_type, r, m, labels(m)[0] as m_type
+                RETURN n, labels(n)[0] as n_type, r, m, labels(m)[0] as m_type, type(r) as rel_type
                 LIMIT $limit
                 """
                 result = session.run(cypher_query, limit=limit)
                 
-                # If no relationships found, get nodes anyway
-                if not result.peek():
+                # Check if we got any results
+                records = list(result)
+                if not records:
+                    # If no relationships found, get nodes anyway
                     cypher_query = """
                     MATCH (n)
                     RETURN n, labels(n)[0] as n_type
                     LIMIT $limit
                     """
                     result = session.run(cypher_query, limit=limit)
+                    records = list(result)
+                else:
+                    # Re-run the query to get all records
+                    result = session.run(cypher_query, limit=limit)
+                    records = list(result)
             
             for record in result:
                 # Process source node
@@ -586,12 +592,17 @@ async def get_graph_data(
                     
                     # Add relationship if it exists
                     rel = record.get('r')
-                    if rel:  # Only add link if relationship exists
+                    rel_type = record.get('rel_type')  # Get from query result
+                    if not rel_type and rel:
                         rel_type = rel.type if hasattr(rel, 'type') else 'RELATED_TO'
-                        
+                    if not rel_type:
+                        rel_type = 'RELATED_TO'
+                    
+                    if rel or 'm' in record:  # Add link if relationship exists or target node exists
                         # Avoid duplicate links
                         link_key = f"{n_id}->{m_id}"
-                        if not any(l.get('key') == link_key for l in links):
+                        reverse_key = f"{m_id}->{n_id}"
+                        if not any(l.get('key') == link_key or l.get('key') == reverse_key for l in links):
                             links.append({
                                 'source': n_id,
                                 'target': m_id,
@@ -754,11 +765,16 @@ async def get_stats():
                 RETURN labels(n)[0] as label, count(n) as count
             """)
             
-            node_counts = {record['label']: record['count'] for record in result}
+            node_counts = {}
+            for record in result:
+                label = record['label']
+                if label:
+                    node_counts[label] = record['count']
             
             # Get relationship count
             result = session.run("MATCH ()-[r]->() RETURN count(r) as count")
-            rel_count = result.single()['count']
+            rel_record = result.single()
+            rel_count = rel_record['count'] if rel_record else 0
             
             # Get talks with transcripts
             result = session.run("""
