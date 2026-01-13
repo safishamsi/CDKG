@@ -19,6 +19,7 @@ function GraphVisualization({ data, searchQuery = null }) {
   const [hoveredLink, setHoveredLink] = useState(null)
   const [nodeTypeFilter, setNodeTypeFilter] = useState('all')
   const [stats, setStats] = useState(null)
+  const [error, setError] = useState(null)
 
   // Node type color mapping based on Neo4j labels
   const nodeTypeColors = {
@@ -62,7 +63,7 @@ function GraphVisualization({ data, searchQuery = null }) {
           result = await getGraphData(null, 150, 1)
         }
         
-        if (result && result.nodes) {
+        if (result && result.nodes && result.nodes.length > 0) {
           // Enhance nodes with better properties
           const enhancedNodes = result.nodes.map(node => ({
             ...node,
@@ -86,9 +87,17 @@ function GraphVisualization({ data, searchQuery = null }) {
             totalNodes: result.total_nodes || enhancedNodes.length,
             totalLinks: result.total_links || result.links.length
           })
+        } else {
+          console.warn('No graph data received:', result)
+          // Set empty data if no results
+          setGraphData({ nodes: [], links: [] })
+          setError(null)
         }
       } catch (error) {
         console.error('Failed to load graph data:', error)
+        setGraphData({ nodes: [], links: [] })
+        setError(error.message || 'Failed to load graph data. Check if backend is running.')
+        // Don't show alert, show error in UI instead
       } finally {
         setLoading(false)
       }
@@ -238,7 +247,15 @@ function GraphVisualization({ data, searchQuery = null }) {
         </div>
         
         {loading && <p className="graph-loading">Loading graph data from Neo4j...</p>}
-        {displayData.nodes.length > 0 && !loading && (
+        {error && (
+          <div className="graph-error">
+            <p>❌ {error}</p>
+            <button onClick={() => { setError(null); setSearchTerm(''); setNodeSearch(''); window.location.reload(); }} className="graph-retry-button">
+              Retry
+            </button>
+          </div>
+        )}
+        {displayData.nodes.length > 0 && !loading && !error && (
           <p className="graph-info">
             Showing {displayData.nodes.length} nodes and {displayData.links.length} relationships
             {nodeTypeFilter !== 'all' && ` (filtered: ${nodeTypeFilter})`}
@@ -247,9 +264,24 @@ function GraphVisualization({ data, searchQuery = null }) {
       </div>
 
       <div className="graph-container" ref={containerRef}>
-        {displayData.nodes.length === 0 && !loading ? (
+        {loading ? (
+          <div className="graph-loading-container">
+            <p>Loading graph data from Neo4j...</p>
+          </div>
+        ) : error ? (
+          <div className="graph-empty">
+            <p style={{ color: '#e74c3c' }}>❌ {error}</p>
+            <p style={{ marginTop: '1rem' }}>Make sure the backend is running and accessible.</p>
+            <button onClick={() => { setError(null); setSearchTerm(''); setNodeSearch(''); window.location.reload(); }} className="graph-retry-button">
+              Retry
+            </button>
+          </div>
+        ) : displayData.nodes.length === 0 ? (
           <div className="graph-empty">
             <p>No nodes found. Try a different search or reset filters.</p>
+            <button onClick={() => { setSearchTerm(''); setNodeSearch(''); setNodeTypeFilter('all'); }} className="graph-retry-button">
+              Reset & Reload
+            </button>
           </div>
         ) : (
           <ForceGraph2D

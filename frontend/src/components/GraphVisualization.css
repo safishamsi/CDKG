@@ -170,11 +170,52 @@
 
 .graph-empty {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   color: #666666;
   font-size: 1.1rem;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.graph-error {
+  background: rgba(231, 76, 60, 0.1);
+  border: 2px solid #e74c3c;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+  color: #e74c3c;
+}
+
+.graph-loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #4a90e2;
+  font-size: 1.1rem;
+}
+
+.graph-retry-button {
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #0066cc 0%, #4a90e2 100%);
+  border: 2px solid #0066cc;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.graph-retry-button:hover {
+  background: linear-gradient(135deg, #4a90e2 0%, #0066cc 100%);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+  transform: translateY(-1px);
 }
 
 .graph-node-details {
