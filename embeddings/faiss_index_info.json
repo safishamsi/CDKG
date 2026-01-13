@@ -1,0 +1,5 @@
+{
+  "total_vectors": 555,
+  "dimension": 384,
+  "index_type": "IndexFlatIP"
+}

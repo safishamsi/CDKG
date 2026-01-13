@@ -1,0 +1,1878 @@
+[
+  {
+    "keyword": "AI",
+    "usage_count": 2
+  },
+  {
+    "keyword": "AlphaGo",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Andy Kirk",
+    "usage_count": 1
+  },
+  {
+    "keyword": "AnyBurl",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Apache Arrow",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Apache Parquet",
+    "usage_count": 1
+  },
+  {
+    "keyword": "BSP programming model",
+    "usage_count": 1
+  },
+  {
+    "keyword": "CNNs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Cairo",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Clinical Key",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Cynefin framework",
+    "usage_count": 1
+  },
+  {
+    "keyword": "DBpedia",
+    "usage_count": 1
+  },
+  {
+    "keyword": "DGL",
+    "usage_count": 1
+  },
+  {
+    "keyword": "DGL deep graph learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Data AI Summit",
+    "usage_count": 1
+  },
+  {
+    "keyword": "DeepMind",
+    "usage_count": 2
+  },
+  {
+    "keyword": "Denodo",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ETL pipeline",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Elsevier data model",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Excel",
+    "usage_count": 1
+  },
+  {
+    "keyword": "FastIP Link",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Fibo ontology",
+    "usage_count": 1
+  },
+  {
+    "keyword": "GC200",
+    "usage_count": 1
+  },
+  {
+    "keyword": "GNN layers",
+    "usage_count": 1
+  },
+  {
+    "keyword": "GRU",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Gartner trends",
+    "usage_count": 1
+  },
+  {
+    "keyword": "GraphML",
+    "usage_count": 1
+  },
+  {
+    "keyword": "GraphQL",
+    "usage_count": 2
+  },
+  {
+    "keyword": "GraphSAGE",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Graphistry",
+    "usage_count": 1
+  },
+  {
+    "keyword": "HyAxis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ICD ten",
+    "usage_count": 1
+  },
+  {
+    "keyword": "IPU M2000",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ISO",
+    "usage_count": 1
+  },
+  {
+    "keyword": "KGLab",
+    "usage_count": 1
+  },
+  {
+    "keyword": "LCC",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Louvain",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Mandelbrot set",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Matplotlib",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Mendeley",
+    "usage_count": 1
+  },
+  {
+    "keyword": "MetaMap",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Metafactory",
+    "usage_count": 1
+  },
+  {
+    "keyword": "MongoDB",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Montreux Jazz Festival",
+    "usage_count": 1
+  },
+  {
+    "keyword": "NLP",
+    "usage_count": 2
+  },
+  {
+    "keyword": "NLP algorithms",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Nvidia",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ODBC",
+    "usage_count": 1
+  },
+  {
+    "keyword": "OWL",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Omnisciences",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Oracle",
+    "usage_count": 1
+  },
+  {
+    "keyword": "PAV",
+    "usage_count": 1
+  },
+  {
+    "keyword": "PERT",
+    "usage_count": 1
+  },
+  {
+    "keyword": "PROV",
+    "usage_count": 1
+  },
+  {
+    "keyword": "PyTorch",
+    "usage_count": 1
+  },
+  {
+    "keyword": "PyTorch Geometric",
+    "usage_count": 1
+  },
+  {
+    "keyword": "PyTorch geometric",
+    "usage_count": 1
+  },
+  {
+    "keyword": "RDF",
+    "usage_count": 1
+  },
+  {
+    "keyword": "RDFOWL",
+    "usage_count": 1
+  },
+  {
+    "keyword": "RDFS",
+    "usage_count": 1
+  },
+  {
+    "keyword": "RDFox",
+    "usage_count": 1
+  },
+  {
+    "keyword": "RankoDB",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Redshift",
+    "usage_count": 1
+  },
+  {
+    "keyword": "SAP",
+    "usage_count": 1
+  },
+  {
+    "keyword": "SCOS",
+    "usage_count": 1
+  },
+  {
+    "keyword": "SCOS Excel",
+    "usage_count": 1
+  },
+  {
+    "keyword": "SDL",
+    "usage_count": 1
+  },
+  {
+    "keyword": "SPARQL",
+    "usage_count": 2
+  },
+  {
+    "keyword": "ScienceDirect",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Scopus",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Sharepath",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Stanford",
+    "usage_count": 1
+  },
+  {
+    "keyword": "TRIPISSTORM",
+    "usage_count": 1
+  },
+  {
+    "keyword": "TensorFlow",
+    "usage_count": 1
+  },
+  {
+    "keyword": "UMLS",
+    "usage_count": 1
+  },
+  {
+    "keyword": "Uber",
+    "usage_count": 1
+  },
+  {
+    "keyword": "action logs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "adaptive analytics",
+    "usage_count": 1
+  },
+  {
+    "keyword": "adaptive machine translation",
+    "usage_count": 1
+  },
+  {
+    "keyword": "adjacency matrix",
+    "usage_count": 1
+  },
+  {
+    "keyword": "amazon neptune",
+    "usage_count": 1
+  },
+  {
+    "keyword": "anelioa kurteva",
+    "usage_count": 1
+  },
+  {
+    "keyword": "api first mindset",
+    "usage_count": 1
+  },
+  {
+    "keyword": "api gateway",
+    "usage_count": 1
+  },
+  {
+    "keyword": "apollo",
+    "usage_count": 1
+  },
+  {
+    "keyword": "apt",
+    "usage_count": 1
+  },
+  {
+    "keyword": "artificial intelligence",
+    "usage_count": 1
+  },
+  {
+    "keyword": "atomic",
+    "usage_count": 1
+  },
+  {
+    "keyword": "attention networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "audiofox",
+    "usage_count": 1
+  },
+  {
+    "keyword": "auditing",
+    "usage_count": 1
+  },
+  {
+    "keyword": "automation",
+    "usage_count": 1
+  },
+  {
+    "keyword": "aws",
+    "usage_count": 1
+  },
+  {
+    "keyword": "azure",
+    "usage_count": 1
+  },
+  {
+    "keyword": "back end for front end",
+    "usage_count": 1
+  },
+  {
+    "keyword": "bellman ford",
+    "usage_count": 1
+  },
+  {
+    "keyword": "betweenness centrality",
+    "usage_count": 1
+  },
+  {
+    "keyword": "big data",
+    "usage_count": 1
+  },
+  {
+    "keyword": "boal",
+    "usage_count": 1
+  },
+  {
+    "keyword": "bpmn",
+    "usage_count": 1
+  },
+  {
+    "keyword": "breadth first search",
+    "usage_count": 1
+  },
+  {
+    "keyword": "brian jacob",
+    "usage_count": 1
+  },
+  {
+    "keyword": "buffer presentation learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "business processes",
+    "usage_count": 1
+  },
+  {
+    "keyword": "c",
+    "usage_count": 1
+  },
+  {
+    "keyword": "c plus plus",
+    "usage_count": 1
+  },
+  {
+    "keyword": "centrality",
+    "usage_count": 1
+  },
+  {
+    "keyword": "centralized repository",
+    "usage_count": 1
+  },
+  {
+    "keyword": "classical algorithms",
+    "usage_count": 1
+  },
+  {
+    "keyword": "click",
+    "usage_count": 1
+  },
+  {
+    "keyword": "closeness centrality",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cloud",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cloud native",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cognitive computing",
+    "usage_count": 1
+  },
+  {
+    "keyword": "collaborative AI",
+    "usage_count": 1
+  },
+  {
+    "keyword": "community detection",
+    "usage_count": 1
+  },
+  {
+    "keyword": "community detection algorithms",
+    "usage_count": 1
+  },
+  {
+    "keyword": "component architecture",
+    "usage_count": 1
+  },
+  {
+    "keyword": "computational chemistry",
+    "usage_count": 1
+  },
+  {
+    "keyword": "concept catalogs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "containerization",
+    "usage_count": 1
+  },
+  {
+    "keyword": "contextual data environments",
+    "usage_count": 1
+  },
+  {
+    "keyword": "contracts",
+    "usage_count": 1
+  },
+  {
+    "keyword": "contrastive learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "convolutional neural networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cosine similarity",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cuGraph",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cusp",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cybersecurity",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cycle detection",
+    "usage_count": 1
+  },
+  {
+    "keyword": "cypher",
+    "usage_count": 2
+  },
+  {
+    "keyword": "darpa",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data analytics",
+    "usage_count": 2
+  },
+  {
+    "keyword": "data art",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data centric",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data dictionaries",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data extraction",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data fabric",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data fabrics",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data flow",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data governance",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data hygiene",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data integration",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data inventory",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data janitorial work",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data lake",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data lineage",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data management",
+    "usage_count": 2
+  },
+  {
+    "keyword": "data mesh",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data parallelism",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data privacy",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data quality",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data science",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data transformation",
+    "usage_count": 1
+  },
+  {
+    "keyword": "data visualization",
+    "usage_count": 1
+  },
+  {
+    "keyword": "datacube",
+    "usage_count": 1
+  },
+  {
+    "keyword": "datadog",
+    "usage_count": 1
+  },
+  {
+    "keyword": "datalog",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dataset catalog",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dataset registry",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dbpedia",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dcat",
+    "usage_count": 1
+  },
+  {
+    "keyword": "decision trees",
+    "usage_count": 1
+  },
+  {
+    "keyword": "decoder",
+    "usage_count": 1
+  },
+  {
+    "keyword": "deep learning",
+    "usage_count": 7
+  },
+  {
+    "keyword": "deep learning graph neural networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "deep neural networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "deepwalk",
+    "usage_count": 1
+  },
+  {
+    "keyword": "defend",
+    "usage_count": 1
+  },
+  {
+    "keyword": "defensive countermeasures",
+    "usage_count": 1
+  },
+  {
+    "keyword": "degree centrality",
+    "usage_count": 1
+  },
+  {
+    "keyword": "depth first search",
+    "usage_count": 1
+  },
+  {
+    "keyword": "descriptive analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "design system",
+    "usage_count": 1
+  },
+  {
+    "keyword": "diagnostic analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "diameter estimation",
+    "usage_count": 1
+  },
+  {
+    "keyword": "digital artifact ontology",
+    "usage_count": 1
+  },
+  {
+    "keyword": "distributed systems",
+    "usage_count": 1
+  },
+  {
+    "keyword": "docker",
+    "usage_count": 2
+  },
+  {
+    "keyword": "dsl",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dublin core",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dynamic graph CNNs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dynamic graphs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "dynamic programming",
+    "usage_count": 1
+  },
+  {
+    "keyword": "elastic search",
+    "usage_count": 1
+  },
+  {
+    "keyword": "enterprise agreed model",
+    "usage_count": 1
+  },
+  {
+    "keyword": "enterprise knowledge",
+    "usage_count": 1
+  },
+  {
+    "keyword": "enterprise web",
+    "usage_count": 1
+  },
+  {
+    "keyword": "entity resolution",
+    "usage_count": 1
+  },
+  {
+    "keyword": "epistemological assumptions",
+    "usage_count": 1
+  },
+  {
+    "keyword": "erdos number",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ethnomusicology",
+    "usage_count": 1
+  },
+  {
+    "keyword": "event driven processes",
+    "usage_count": 1
+  },
+  {
+    "keyword": "excelvin",
+    "usage_count": 1
+  },
+  {
+    "keyword": "executive business rules",
+    "usage_count": 1
+  },
+  {
+    "keyword": "explainable AI",
+    "usage_count": 1
+  },
+  {
+    "keyword": "extractors",
+    "usage_count": 1
+  },
+  {
+    "keyword": "fair",
+    "usage_count": 1
+  },
+  {
+    "keyword": "feature spaces",
+    "usage_count": 1
+  },
+  {
+    "keyword": "federated architecture",
+    "usage_count": 1
+  },
+  {
+    "keyword": "fibo",
+    "usage_count": 1
+  },
+  {
+    "keyword": "fractals",
+    "usage_count": 1
+  },
+  {
+    "keyword": "fraud detection",
+    "usage_count": 1
+  },
+  {
+    "keyword": "gainsight",
+    "usage_count": 1
+  },
+  {
+    "keyword": "galois graph computing engine",
+    "usage_count": 1
+  },
+  {
+    "keyword": "generative adversarial networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "geometric deep learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "george",
+    "usage_count": 2
+  },
+  {
+    "keyword": "github",
+    "usage_count": 1
+  },
+  {
+    "keyword": "gluon communication engine",
+    "usage_count": 1
+  },
+  {
+    "keyword": "google cloud platform",
+    "usage_count": 1
+  },
+  {
+    "keyword": "goulain",
+    "usage_count": 1
+  },
+  {
+    "keyword": "gpt three",
+    "usage_count": 1
+  },
+  {
+    "keyword": "gql",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph algorithm library",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph algorithms",
+    "usage_count": 2
+  },
+  {
+    "keyword": "graph analytics",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph builder",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph class classification",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph classification",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph clustering",
+    "usage_count": 2
+  },
+  {
+    "keyword": "graph convolution model",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph convolutional neural network",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph data science",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph database",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph databases",
+    "usage_count": 2
+  },
+  {
+    "keyword": "graph edm",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph embedding",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph embeddings",
+    "usage_count": 2
+  },
+  {
+    "keyword": "graph factorization",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph machine learning",
+    "usage_count": 2
+  },
+  {
+    "keyword": "graph neural networks",
+    "usage_count": 9
+  },
+  {
+    "keyword": "graph object in action language",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph query language",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph substructure networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph theory",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph thinking",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph transformer networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph traversal",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graph visualization",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graphBLAST",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graphcore",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graphdb",
+    "usage_count": 1
+  },
+  {
+    "keyword": "graphql",
+    "usage_count": 2
+  },
+  {
+    "keyword": "graphs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "gremlin",
+    "usage_count": 2
+  },
+  {
+    "keyword": "health care",
+    "usage_count": 1
+  },
+  {
+    "keyword": "heterogeneous graphs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "homophily",
+    "usage_count": 1
+  },
+  {
+    "keyword": "http protocol",
+    "usage_count": 1
+  },
+  {
+    "keyword": "hybrid intelligence",
+    "usage_count": 1
+  },
+  {
+    "keyword": "iGraph",
+    "usage_count": 1
+  },
+  {
+    "keyword": "in database machine learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "inductive logic programming",
+    "usage_count": 1
+  },
+  {
+    "keyword": "inference",
+    "usage_count": 1
+  },
+  {
+    "keyword": "infusion",
+    "usage_count": 1
+  },
+  {
+    "keyword": "insights",
+    "usage_count": 1
+  },
+  {
+    "keyword": "interlapse",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ipu architecture",
+    "usage_count": 1
+  },
+  {
+    "keyword": "james",
+    "usage_count": 1
+  },
+  {
+    "keyword": "java",
+    "usage_count": 1
+  },
+  {
+    "keyword": "jena",
+    "usage_count": 1
+  },
+  {
+    "keyword": "jozana diotis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "json",
+    "usage_count": 3
+  },
+  {
+    "keyword": "json ld",
+    "usage_count": 2
+  },
+  {
+    "keyword": "juan sequeira",
+    "usage_count": 1
+  },
+  {
+    "keyword": "kafka",
+    "usage_count": 1
+  },
+  {
+    "keyword": "kanban",
+    "usage_count": 1
+  },
+  {
+    "keyword": "katana graph",
+    "usage_count": 1
+  },
+  {
+    "keyword": "knowledge bases",
+    "usage_count": 1
+  },
+  {
+    "keyword": "knowledge driven data catalogs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "knowledge graph",
+    "usage_count": 5
+  },
+  {
+    "keyword": "knowledge graph completion",
+    "usage_count": 1
+  },
+  {
+    "keyword": "knowledge graphs",
+    "usage_count": 9
+  },
+  {
+    "keyword": "knowledge mesh",
+    "usage_count": 1
+  },
+  {
+    "keyword": "label propagation model",
+    "usage_count": 1
+  },
+  {
+    "keyword": "learning technologies",
+    "usage_count": 1
+  },
+  {
+    "keyword": "legal documents",
+    "usage_count": 1
+  },
+  {
+    "keyword": "link data benchmarking councils",
+    "usage_count": 1
+  },
+  {
+    "keyword": "link prediction",
+    "usage_count": 2
+  },
+  {
+    "keyword": "linked data",
+    "usage_count": 1
+  },
+  {
+    "keyword": "looker",
+    "usage_count": 1
+  },
+  {
+    "keyword": "low precision number formats",
+    "usage_count": 1
+  },
+  {
+    "keyword": "machine executable",
+    "usage_count": 1
+  },
+  {
+    "keyword": "machine learning",
+    "usage_count": 7
+  },
+  {
+    "keyword": "manifold learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "markov decision process",
+    "usage_count": 1
+  },
+  {
+    "keyword": "maven",
+    "usage_count": 1
+  },
+  {
+    "keyword": "message bus",
+    "usage_count": 1
+  },
+  {
+    "keyword": "message function",
+    "usage_count": 1
+  },
+  {
+    "keyword": "message passing",
+    "usage_count": 1
+  },
+  {
+    "keyword": "message passing algorithm",
+    "usage_count": 1
+  },
+  {
+    "keyword": "metadata",
+    "usage_count": 2
+  },
+  {
+    "keyword": "metadata registries",
+    "usage_count": 1
+  },
+  {
+    "keyword": "metadata repositories",
+    "usage_count": 1
+  },
+  {
+    "keyword": "metrics",
+    "usage_count": 1
+  },
+  {
+    "keyword": "michel",
+    "usage_count": 1
+  },
+  {
+    "keyword": "microservice architecture",
+    "usage_count": 1
+  },
+  {
+    "keyword": "middleware",
+    "usage_count": 1
+  },
+  {
+    "keyword": "mihir",
+    "usage_count": 1
+  },
+  {
+    "keyword": "mini batch training",
+    "usage_count": 1
+  },
+  {
+    "keyword": "mitre att and ck",
+    "usage_count": 1
+  },
+  {
+    "keyword": "mitre corporation",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ml",
+    "usage_count": 1
+  },
+  {
+    "keyword": "mobileye",
+    "usage_count": 1
+  },
+  {
+    "keyword": "model driven layered architecture",
+    "usage_count": 1
+  },
+  {
+    "keyword": "money laundering",
+    "usage_count": 1
+  },
+  {
+    "keyword": "monte carlo",
+    "usage_count": 1
+  },
+  {
+    "keyword": "multilayer perceptrons",
+    "usage_count": 1
+  },
+  {
+    "keyword": "multiple task learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "naso kiriakov",
+    "usage_count": 1
+  },
+  {
+    "keyword": "natural language processing",
+    "usage_count": 2
+  },
+  {
+    "keyword": "neo4j",
+    "usage_count": 2
+  },
+  {
+    "keyword": "network medicine",
+    "usage_count": 1
+  },
+  {
+    "keyword": "network x",
+    "usage_count": 1
+  },
+  {
+    "keyword": "neural algorithmic reasoning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "neural execution of graph algorithms",
+    "usage_count": 1
+  },
+  {
+    "keyword": "neural networks",
+    "usage_count": 5
+  },
+  {
+    "keyword": "new relic",
+    "usage_count": 1
+  },
+  {
+    "keyword": "next generation knowledge graphs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "nlp",
+    "usage_count": 3
+  },
+  {
+    "keyword": "no code platform",
+    "usage_count": 1
+  },
+  {
+    "keyword": "node classification",
+    "usage_count": 2
+  },
+  {
+    "keyword": "node features",
+    "usage_count": 1
+  },
+  {
+    "keyword": "non negative matrix factorization",
+    "usage_count": 1
+  },
+  {
+    "keyword": "npm",
+    "usage_count": 1
+  },
+  {
+    "keyword": "object graph mapping",
+    "usage_count": 1
+  },
+  {
+    "keyword": "offensive techniques",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ontological knowledge",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ontologies",
+    "usage_count": 4
+  },
+  {
+    "keyword": "ontology",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ontology engines",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ontotext",
+    "usage_count": 1
+  },
+  {
+    "keyword": "open graph benchmark",
+    "usage_count": 1
+  },
+  {
+    "keyword": "openCypher",
+    "usage_count": 1
+  },
+  {
+    "keyword": "opencypher",
+    "usage_count": 1
+  },
+  {
+    "keyword": "operations research",
+    "usage_count": 1
+  },
+  {
+    "keyword": "or",
+    "usage_count": 1
+  },
+  {
+    "keyword": "oreilly",
+    "usage_count": 1
+  },
+  {
+    "keyword": "owl",
+    "usage_count": 4
+  },
+  {
+    "keyword": "page rank",
+    "usage_count": 1
+  },
+  {
+    "keyword": "pagerduty",
+    "usage_count": 1
+  },
+  {
+    "keyword": "pandas",
+    "usage_count": 1
+  },
+  {
+    "keyword": "patent corpus",
+    "usage_count": 1
+  },
+  {
+    "keyword": "pattern recognition",
+    "usage_count": 1
+  },
+  {
+    "keyword": "performance pricing",
+    "usage_count": 1
+  },
+  {
+    "keyword": "peter hasso",
+    "usage_count": 1
+  },
+  {
+    "keyword": "pipeline parallelism",
+    "usage_count": 1
+  },
+  {
+    "keyword": "power bi",
+    "usage_count": 1
+  },
+  {
+    "keyword": "predictive analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "prescriptive analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "pretrained executor",
+    "usage_count": 1
+  },
+  {
+    "keyword": "probabilistic graphs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "process analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "process code segment verification",
+    "usage_count": 1
+  },
+  {
+    "keyword": "prolog",
+    "usage_count": 1
+  },
+  {
+    "keyword": "property graphs",
+    "usage_count": 1
+  },
+  {
+    "keyword": "proprietary data models",
+    "usage_count": 1
+  },
+  {
+    "keyword": "prov",
+    "usage_count": 1
+  },
+  {
+    "keyword": "python",
+    "usage_count": 1
+  },
+  {
+    "keyword": "pyvis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rag",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ram",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rdf",
+    "usage_count": 5
+  },
+  {
+    "keyword": "rdf star",
+    "usage_count": 2
+  },
+  {
+    "keyword": "rdf4j",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rdfox",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rdkit",
+    "usage_count": 1
+  },
+  {
+    "keyword": "reactive programming",
+    "usage_count": 1
+  },
+  {
+    "keyword": "reciprocal learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "recommendation systems",
+    "usage_count": 1
+  },
+  {
+    "keyword": "recurrent networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "refreshers",
+    "usage_count": 1
+  },
+  {
+    "keyword": "reinforcement learning",
+    "usage_count": 3
+  },
+  {
+    "keyword": "reliable messaging",
+    "usage_count": 1
+  },
+  {
+    "keyword": "resource identifier",
+    "usage_count": 1
+  },
+  {
+    "keyword": "resource locator",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rosa finn",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rubin",
+    "usage_count": 1
+  },
+  {
+    "keyword": "rule based reasoning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sales assist",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sally",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sap",
+    "usage_count": 1
+  },
+  {
+    "keyword": "scala",
+    "usage_count": 1
+  },
+  {
+    "keyword": "schema definition language",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sdmx",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sebastian schmidt",
+    "usage_count": 1
+  },
+  {
+    "keyword": "semantic data management",
+    "usage_count": 1
+  },
+  {
+    "keyword": "semantic loss functions",
+    "usage_count": 1
+  },
+  {
+    "keyword": "semantic standards",
+    "usage_count": 1
+  },
+  {
+    "keyword": "semantic technologies",
+    "usage_count": 2
+  },
+  {
+    "keyword": "semantic technology",
+    "usage_count": 1
+  },
+  {
+    "keyword": "semantic web",
+    "usage_count": 2
+  },
+  {
+    "keyword": "semantic web standards",
+    "usage_count": 1
+  },
+  {
+    "keyword": "serverless patterns",
+    "usage_count": 1
+  },
+  {
+    "keyword": "shackle",
+    "usage_count": 6
+  },
+  {
+    "keyword": "shackle advanced features",
+    "usage_count": 1
+  },
+  {
+    "keyword": "shackle core",
+    "usage_count": 1
+  },
+  {
+    "keyword": "shackle models",
+    "usage_count": 1
+  },
+  {
+    "keyword": "shacl",
+    "usage_count": 1
+  },
+  {
+    "keyword": "shallow encoder",
+    "usage_count": 1
+  },
+  {
+    "keyword": "shallow sampling",
+    "usage_count": 1
+  },
+  {
+    "keyword": "similarity algorithms",
+    "usage_count": 1
+  },
+  {
+    "keyword": "slido",
+    "usage_count": 1
+  },
+  {
+    "keyword": "smart folders",
+    "usage_count": 1
+  },
+  {
+    "keyword": "snowflake",
+    "usage_count": 1
+  },
+  {
+    "keyword": "social network benchmark",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sparco",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sparkle",
+    "usage_count": 6
+  },
+  {
+    "keyword": "sparql",
+    "usage_count": 3
+  },
+  {
+    "keyword": "spit",
+    "usage_count": 1
+  },
+  {
+    "keyword": "splunk",
+    "usage_count": 1
+  },
+  {
+    "keyword": "sql",
+    "usage_count": 1
+  },
+  {
+    "keyword": "state management",
+    "usage_count": 1
+  },
+  {
+    "keyword": "statistical AI",
+    "usage_count": 1
+  },
+  {
+    "keyword": "statistical analytics",
+    "usage_count": 1
+  },
+  {
+    "keyword": "statistical relational learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "stream processing",
+    "usage_count": 1
+  },
+  {
+    "keyword": "supervised learning",
+    "usage_count": 2
+  },
+  {
+    "keyword": "supply chain management",
+    "usage_count": 1
+  },
+  {
+    "keyword": "support vector machines",
+    "usage_count": 1
+  },
+  {
+    "keyword": "swell",
+    "usage_count": 1
+  },
+  {
+    "keyword": "symbolic AI",
+    "usage_count": 1
+  },
+  {
+    "keyword": "t five",
+    "usage_count": 1
+  },
+  {
+    "keyword": "tableau",
+    "usage_count": 1
+  },
+  {
+    "keyword": "taxonomies",
+    "usage_count": 1
+  },
+  {
+    "keyword": "taxonomy development",
+    "usage_count": 1
+  },
+  {
+    "keyword": "taxonomy management",
+    "usage_count": 1
+  },
+  {
+    "keyword": "technical debt",
+    "usage_count": 1
+  },
+  {
+    "keyword": "telecommunication networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "temporal graph attention network",
+    "usage_count": 1
+  },
+  {
+    "keyword": "temporal graph networks",
+    "usage_count": 2
+  },
+  {
+    "keyword": "temporal graph sum networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "tensor",
+    "usage_count": 1
+  },
+  {
+    "keyword": "text analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "transaction guarantees",
+    "usage_count": 1
+  },
+  {
+    "keyword": "transformers",
+    "usage_count": 1
+  },
+  {
+    "keyword": "triple store",
+    "usage_count": 1
+  },
+  {
+    "keyword": "triples",
+    "usage_count": 1
+  },
+  {
+    "keyword": "trunk supervision",
+    "usage_count": 1
+  },
+  {
+    "keyword": "tsp",
+    "usage_count": 1
+  },
+  {
+    "keyword": "turtle",
+    "usage_count": 1
+  },
+  {
+    "keyword": "ubs knowledge graph",
+    "usage_count": 1
+  },
+  {
+    "keyword": "uml",
+    "usage_count": 1
+  },
+  {
+    "keyword": "unified graph",
+    "usage_count": 1
+  },
+  {
+    "keyword": "unsupervised learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "unsupervised machine learning",
+    "usage_count": 1
+  },
+  {
+    "keyword": "update function",
+    "usage_count": 1
+  },
+  {
+    "keyword": "uri",
+    "usage_count": 1
+  },
+  {
+    "keyword": "user behavior analysis",
+    "usage_count": 1
+  },
+  {
+    "keyword": "value iteration",
+    "usage_count": 1
+  },
+  {
+    "keyword": "value prediction networks",
+    "usage_count": 1
+  },
+  {
+    "keyword": "van gogh",
+    "usage_count": 1
+  },
+  {
+    "keyword": "vasil mamcheff",
+    "usage_count": 1
+  },
+  {
+    "keyword": "vasil momchev",
+    "usage_count": 1
+  },
+  {
+    "keyword": "verhoeff",
+    "usage_count": 1
+  },
+  {
+    "keyword": "vincent",
+    "usage_count": 1
+  },
+  {
+    "keyword": "virtual graph databases",
+    "usage_count": 1
+  },
+  {
+    "keyword": "visual comic leaderboard",
+    "usage_count": 1
+  },
+  {
+    "keyword": "visualization",
+    "usage_count": 1
+  },
+  {
+    "keyword": "vocabulary management",
+    "usage_count": 1
+  },
+  {
+    "keyword": "web annotation data model",
+    "usage_count": 1
+  },
+  {
+    "keyword": "wiki data",
+    "usage_count": 1
+  },
+  {
+    "keyword": "xml",
+    "usage_count": 2
+  },
+  {
+    "keyword": "yaml",
+    "usage_count": 1
+  },
+  {
+    "keyword": "yoshua bengio",
+    "usage_count": 1
+  }
+]

@@ -1,0 +1,283 @@
+[
+  {
+    "name": "Andreea Deac",
+    "talks": [
+      "Neural Algorithmic Reasoning: Combining Classical Algorithms and Neural Networks"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Anelia Kurteva",
+    "talks": [
+      "Implementing Informed Consent with Knowledge Graphs"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Atanas Kiryakov",
+    "talks": [
+      "Knowledge Graphs as Hub for Data, Metadata and Content",
+      "RDF Leveled the Advantages of LPG and Keeps 3 Key Benefits: Standards, Semantics & Interoperability"
+    ],
+    "talk_count": 2
+  },
+  {
+    "name": "Barr Moses",
+    "talks": [
+      "Data Observability: How to Eliminate Data Downtime and Start Trusting Your Data"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Bryon Jacob",
+    "talks": [
+      "(DataCatalog)_-[poweredBy]-_(KnowledgeGraph)"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Carlo Luschi",
+    "talks": [
+      "Leveraging Graphcore\u2019s IPU architecture for large scale GNN compute"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Dan Boerner",
+    "talks": [
+      "Humans and the Graph - Inspiring and empowering GraphQL adoption"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Dave Duggal",
+    "talks": [
+      "One graph to bind them all! Linking data & apps for event-driven interoperability"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "David Amzallag",
+    "talks": [
+      "Knowledge Mesh: From Data Silos to Data Fabric at Global 2000 Enterprises"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "David Newman",
+    "talks": [
+      "The Enterprise Knowledge Graph"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Eran Avidan",
+    "talks": [
+      "Sales AI: Building and maintaining a knowledge graph"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Frank van Harmelen",
+    "talks": [
+      "Systems that learn and reason"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Gadi Singer",
+    "talks": [
+      "Thrill-K: Rethinking knowledge layering and construction for higher machine cognition"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Ines Chami",
+    "talks": [
+      "GraphEDM: A Unified Framework for Machine Learning on Graphs"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Juan Sequeda",
+    "talks": [
+      "(DataCatalog)_-[poweredBy]-_(KnowledgeGraph)"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "J\u00f6rg Schad",
+    "talks": [
+      "Graph Analytics vs Graph Machine Learning"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Keshav Pingali",
+    "talks": [
+      "Knowledge Graphs, Graph AI, & the Need for High performance Graph Computing"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Kirell Benzi",
+    "talks": [
+      "Secret Knowledge: Visualizing Complexity"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Kurt Cagle",
+    "talks": [
+      "Knowledge Graphs: Moving Beyond RDF"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Marcus N\u00f6lke",
+    "talks": [
+      "How a Knowledge Graph Can Support Advanced Price Analytics in Supply Chain Management"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Michael Bronstein",
+    "talks": [
+      "Deep Learning on Graphs: Past, Present, And Future"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Michiel Hildebrand",
+    "talks": [
+      "Van Gogh Worldwide: Constructing and searching a knowledge graph of linked art"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Mike Atkin",
+    "talks": [
+      "The Business Case for Data Management"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Mike Dillinger",
+    "talks": [
+      "Taxonomies: Connecting Data with Duct Tape"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Natasa Varytimou",
+    "talks": [
+      "UBS Helix Knowledge Graph: The Power of Information"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Nikolaj van Omme",
+    "talks": [
+      "Hybridization of Machine Learning and Operational Research is the future of AI"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Omar Khan",
+    "talks": [
+      "The Enterprise Knowledge Graph"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Ora Lassila",
+    "talks": [
+      "Graph Abstractions Matter"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Paco Nathan",
+    "talks": [
+      "Graph Thinking"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Peter Crocker",
+    "talks": [
+      "Reasoning for the Answer: Who is the Greatest Formula 1 Driver of all Time?"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Peter Kaloroumakis",
+    "talks": [
+      "Introducing D3FEND: A Knowledge Graph of Cybersecurity Countermeasures"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Sebastian Hellmann",
+    "talks": [
+      "DBpedia Databus: A platform to evolve knowledge and AI from versioned web files"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Sebastian Schmidt",
+    "talks": [
+      "The game plan for your Knowledge Graph-driven FAIR data platform"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Szymon Klarman",
+    "talks": [
+      "Knowledge Mesh: From Data Silos to Data Fabric at Global 2000 Enterprises"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Vaishali Raghvani",
+    "talks": [
+      "Legal Knowledge Graphs"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Vanessa Lopez",
+    "talks": [
+      "Protecting vital public health programs with AI and Knowledge Graphs"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Vassil Momtchev",
+    "talks": [
+      "Knowledge Graphs as Hub for Data, Metadata and Content"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Veronika Heimsbakk",
+    "talks": [
+      "Modelling regulation requirements using SHACL"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Veronique Moore",
+    "talks": [
+      "Applying Semantic Web Standards for Knowledge Representation at Elsevier"
+    ],
+    "talk_count": 1
+  },
+  {
+    "name": "Victor Lee",
+    "talks": [
+      "Graph Algorithms & Graph Machine Learning: Making Sense of Today's Choices"
+    ],
+    "talk_count": 1
+  }
+]
