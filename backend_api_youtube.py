@@ -575,7 +575,7 @@ async def get_graph_data(
                         nodes.append(node_map[m_id])
                     
                     # Add relationship
-                    rel = record.get('rel')
+                    rel = record.get('r')
                     rel_type = rel.type if rel else 'RELATED_TO'
                     
                     # Avoid duplicate links
