@@ -591,7 +591,8 @@ async def get_graph_data(
                     nodes.append(node_map[n_id])
                 
                 # Process target node and relationship (if relationship exists)
-                if 'm' in record and record['m']:
+                # Check if we have a target node (m) - this indicates a relationship exists
+                if record.get('m') is not None or record.get('m_type') is not None:
                     m = record['m']
                     m_type = record.get('m_type') or (record.get('m_labels')[0] if record.get('m_labels') else 'Unknown')
                     m_props = record.get('m_props', {})
@@ -639,7 +640,8 @@ async def get_graph_data(
                     rel_type = record.get('rel_type') or (rel.type if rel and hasattr(rel, 'type') else 'RELATED_TO')
                     rel_props = record.get('rel_props', {})
                     
-                    if rel or 'm' in record:  # Add link if relationship exists or target node exists
+                    # Always add link if we have both source and target nodes (relationship exists)
+                    if rel_type and n_id and m_id:
                         # Avoid duplicate links
                         link_key = f"{n_id}->{m_id}"
                         reverse_key = f"{m_id}->{n_id}"
