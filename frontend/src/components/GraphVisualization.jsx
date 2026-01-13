@@ -89,6 +89,9 @@ function GraphVisualization({ data, searchQuery = null }) {
               }
             }
             
+            // Determine node type - use labels if type is missing
+            const nodeType = node.type || (node.labels && node.labels[0]) || 'Unknown'
+            
             return {
               ...node,
               name: displayName, // Use improved name
@@ -97,11 +100,11 @@ function GraphVisualization({ data, searchQuery = null }) {
                 link => link.source === node.id || link.target === node.id
               ).length,
               // Ensure proper type
-              type: node.type || 'Unknown',
-              // Set color based on type
-              color: nodeTypeColors[node.type] || nodeTypeColors['default'],
+              type: nodeType,
+              // Set color based on type (use labels if type is missing)
+              color: nodeTypeColors[nodeType] || nodeTypeColors['default'],
               // Set symbol
-              symbol: nodeTypeSymbols[node.type] || nodeTypeSymbols['default']
+              symbol: nodeTypeSymbols[nodeType] || nodeTypeSymbols['default']
             }
           })
 
@@ -185,9 +188,11 @@ function GraphVisualization({ data, searchQuery = null }) {
   }, [])
 
   // Filter nodes by type
+  // Optionally filter out Community nodes if they're cluttering the view
+  const nodesToFilter = graphData.nodes
   const filteredNodes = nodeTypeFilter === 'all' 
-    ? graphData.nodes 
-    : graphData.nodes.filter(node => node.type === nodeTypeFilter)
+    ? nodesToFilter 
+    : nodesToFilter.filter(node => node.type === nodeTypeFilter)
   
   const filteredLinks = graphData.links.filter(link => {
     const sourceNode = filteredNodes.find(n => n.id === link.source)
