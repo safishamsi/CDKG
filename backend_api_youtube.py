@@ -104,15 +104,35 @@ class JobStatusResponse(BaseModel):
 async def startup_event():
     """Initialize systems on startup"""
     global rag_system, orchestrator, youtube_processor
-    try:
-        print("🚀 Initializing systems...")
-        rag_system = RAGSystem()
-        orchestrator = LangGraphOrchestrator(rag_system)
-        youtube_processor = YouTubeVideoProcessor()
-        print("✅ All systems ready!")
-    except Exception as e:
-        print(f"❌ Error initializing systems: {e}")
-        raise
+    import asyncio
+    
+    async def initialize_systems():
+        try:
+            print("🚀 Initializing systems...")
+            print("   This may take a minute (loading ML models)...")
+            
+            # Initialize RAG system (loads embedding model - can take 30-60 seconds)
+            print("   Loading RAG system...")
+            rag_system = RAGSystem()
+            
+            # Initialize orchestrator
+            print("   Initializing orchestrator...")
+            orchestrator = LangGraphOrchestrator(rag_system)
+            
+            # Initialize YouTube processor (lightweight, no heavy loading)
+            print("   Initializing YouTube processor...")
+            youtube_processor = YouTubeVideoProcessor()
+            
+            print("✅ All systems ready!")
+        except Exception as e:
+            print(f"❌ Error initializing systems: {e}")
+            import traceback
+            traceback.print_exc()
+            # Don't raise - allow server to start even if some components fail
+            print("⚠️  Server starting with limited functionality")
+    
+    # Run initialization in background
+    asyncio.create_task(initialize_systems())
 
 
 @app.on_event("shutdown")
@@ -143,13 +163,35 @@ async def root():
 async def health():
     """Health check with system status"""
     global rag_system, orchestrator, youtube_processor
-    return {
-        "status": "healthy",
-        "rag_system": rag_system is not None,
-        "orchestrator": orchestrator is not None,
-        "youtube_processor": youtube_processor is not None,
-        "timestamp": datetime.now().isoformat()
-    }
+    try:
+        # Quick check if systems are ready
+        rag_ready = rag_system is not None
+        orchestrator_ready = orchestrator is not None
+        youtube_ready = youtube_processor is not None
+        
+        # If RAG system exists, test Neo4j connection
+        neo4j_connected = False
+        if rag_system and rag_system.neo4j_driver:
+            try:
+                rag_system.neo4j_driver.verify_connectivity()
+                neo4j_connected = True
+            except:
+                pass
+        
+        return {
+            "status": "healthy" if (rag_ready and orchestrator_ready) else "initializing",
+            "rag_system": rag_ready,
+            "orchestrator": orchestrator_ready,
+            "youtube_processor": youtube_ready,
+            "neo4j_connected": neo4j_connected,
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
 
 
 @app.post("/api/query", response_model=QueryResponse)
