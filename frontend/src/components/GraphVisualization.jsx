@@ -296,27 +296,31 @@ function GraphVisualization({ data, searchQuery = null }) {
             nodeVal={node => getNodeSize(node)}
             nodeCanvasObject={(node, ctx, globalScale) => {
               const label = node.name || node.id
-              const fontSize = 12 / globalScale
-              const nodeSize = getNodeSize(node)
+              const fontSize = Math.max(10, 12 / globalScale)
+              const nodeSize = Math.max(5, getNodeSize(node))
               
-              // Draw node circle
+              // Draw node circle with glow effect
+              ctx.shadowBlur = 15
+              ctx.shadowColor = node.color || nodeTypeColors['default']
               ctx.fillStyle = node.color || nodeTypeColors['default']
               ctx.beginPath()
               ctx.arc(node.x, node.y, nodeSize, 0, 2 * Math.PI, false)
               ctx.fill()
+              ctx.shadowBlur = 0
               
               // Draw border
-              ctx.strokeStyle = node === hoveredNode ? '#ffffff' : '#333333'
-              ctx.lineWidth = node === hoveredNode ? 3 / globalScale : 1 / globalScale
+              ctx.strokeStyle = node === hoveredNode ? '#ffffff' : 'rgba(255, 255, 255, 0.3)'
+              ctx.lineWidth = node === hoveredNode ? 3 / globalScale : 1.5 / globalScale
               ctx.stroke()
               
               // Draw label
-              if (globalScale > 0.5) {
+              if (globalScale > 0.3 && label) {
                 ctx.fillStyle = '#ffffff'
-                ctx.font = `${fontSize}px Sans-Serif`
+                ctx.font = `bold ${fontSize}px Sans-Serif`
                 ctx.textAlign = 'center'
-                ctx.textBaseline = 'middle'
-                ctx.fillText(label.substring(0, 20), node.x, node.y + nodeSize + fontSize + 2)
+                ctx.textBaseline = 'top'
+                const textY = node.y + nodeSize + 5
+                ctx.fillText(label.substring(0, 25), node.x, textY)
               }
             }}
             linkLabel={link => {
@@ -355,11 +359,21 @@ function GraphVisualization({ data, searchQuery = null }) {
             onLinkClick={link => {
               console.log('Link clicked:', link)
             }}
-            backgroundColor="#0a0a0a"
+            backgroundColor="rgba(10, 10, 10, 0.95)"
             width={dimensions.width}
             height={dimensions.height}
             cooldownTicks={100}
-            onEngineStop={() => graphRef.current?.zoomToFit(400, 50)}
+            onEngineStop={() => {
+              if (graphRef.current && displayData.nodes.length > 0) {
+                setTimeout(() => {
+                  graphRef.current?.zoomToFit(400, 50)
+                }, 100)
+              }
+            }}
+            enablePanInteraction={true}
+            enableZoomInteraction={true}
+            d3AlphaDecay={0.0228}
+            d3VelocityDecay={0.4}
           />
         )}
       </div>
