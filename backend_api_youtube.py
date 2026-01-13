@@ -104,23 +104,26 @@ class JobStatusResponse(BaseModel):
 async def startup_event():
     """Initialize systems on startup"""
     global rag_system, orchestrator, youtube_processor
-    import asyncio
+    import threading
     
-    async def initialize_systems():
+    def initialize_systems():
         try:
             print("🚀 Initializing systems...")
             print("   This may take a minute (loading ML models)...")
             
             # Initialize RAG system (loads embedding model - can take 30-60 seconds)
             print("   Loading RAG system...")
+            global rag_system
             rag_system = RAGSystem()
             
             # Initialize orchestrator
             print("   Initializing orchestrator...")
+            global orchestrator
             orchestrator = LangGraphOrchestrator(rag_system)
             
             # Initialize YouTube processor (lightweight, no heavy loading)
             print("   Initializing YouTube processor...")
+            global youtube_processor
             youtube_processor = YouTubeVideoProcessor()
             
             print("✅ All systems ready!")
@@ -128,11 +131,12 @@ async def startup_event():
             print(f"❌ Error initializing systems: {e}")
             import traceback
             traceback.print_exc()
-            # Don't raise - allow server to start even if some components fail
             print("⚠️  Server starting with limited functionality")
     
-    # Run initialization in background
-    asyncio.create_task(initialize_systems())
+    # Run initialization in background thread (non-blocking)
+    init_thread = threading.Thread(target=initialize_systems, daemon=True)
+    init_thread.start()
+    print("⏳ Server starting, systems initializing in background...")
 
 
 @app.on_event("shutdown")
