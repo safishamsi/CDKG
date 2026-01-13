@@ -89,3 +89,44 @@
   cursor: not-allowed;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .input-area {
+    padding: 1rem;
+  }
+  
+  .input-form {
+    gap: 0.5rem;
+  }
+  
+  .input-textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.625rem 0.875rem;
+  }
+  
+  .send-button {
+    padding: 0.625rem 1rem;
+    min-width: 44px;
+    height: 44px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-area {
+    padding: 0.75rem;
+  }
+  
+  .input-textarea {
+    font-size: 16px;
+    padding: 0.5rem 0.75rem;
+    max-height: 120px;
+  }
+  
+  .send-button {
+    padding: 0.5rem 0.75rem;
+    min-width: 44px;
+    height: 44px;
+  }
+}
+

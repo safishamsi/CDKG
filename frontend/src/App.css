@@ -188,3 +188,64 @@ main {
   z-index: 10;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App-header {
+    padding: 1rem;
+  }
+  
+  .App-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .App-header p {
+    font-size: 0.9rem;
+  }
+  
+  .App-nav {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .App-nav button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  main {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    padding: 0.75rem;
+  }
+  
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .App-header p {
+    font-size: 0.85rem;
+  }
+  
+  .App-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .App-nav button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+  
+  main {
+    padding: 0.5rem;
+  }
+}
+

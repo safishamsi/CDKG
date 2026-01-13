@@ -31,3 +31,24 @@
   background: linear-gradient(180deg, #ff8c42 0%, #4a90e2 50%, #32cd32 100%);
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .message-list {
+    padding: 1rem;
+  }
+  
+  .messages-container {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-list {
+    padding: 0.75rem;
+  }
+  
+  .messages-container {
+    gap: 0.5rem;
+  }
+}
+

@@ -38,3 +38,24 @@ code {
   background: linear-gradient(180deg, #ff8c42 0%, #4a90e2 50%, #32cd32 100%);
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+

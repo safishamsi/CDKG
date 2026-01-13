@@ -1,0 +1,41 @@
+.graph-3d-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.6;
+  pointer-events: none !important;
+  overflow: hidden;
+  background: transparent;
+}
+
+.graph-3d-background canvas {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+  pointer-events: none !important;
+  touch-action: none;
+}
+
+/* Ensure content is above the background */
+.App {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #1a0f0a 50%, #0f1a1a 75%, #1a1a1a 100%);
+}
+
+/* Add subtle overlay to blend 3D with background - lighter */
+.graph-3d-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
