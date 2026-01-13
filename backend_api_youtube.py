@@ -507,39 +507,56 @@ async def get_graph_data(
                 """
                 result = session.run(cypher_query, query=query, limit=limit)
             else:
-                # General graph: get a sample of nodes and relationships
+                # General graph: get ALL relationships and nodes from Neo4j
+                # Extract complete graph structure with all properties
                 cypher_query = """
                 MATCH (n)-[r]->(m)
-                RETURN n, labels(n)[0] as n_type, r, m, labels(m)[0] as m_type, type(r) as rel_type
+                RETURN 
+                    n, 
+                    labels(n) as n_labels,
+                    labels(n)[0] as n_type,
+                    properties(n) as n_props,
+                    r,
+                    type(r) as rel_type,
+                    properties(r) as rel_props,
+                    m,
+                    labels(m) as m_labels,
+                    labels(m)[0] as m_type,
+                    properties(m) as m_props
+                ORDER BY n_type, m_type
                 LIMIT $limit
                 """
                 result = session.run(cypher_query, limit=limit)
-                
-                # Check if we got any results
                 records = list(result)
+                
+                # If no relationships found, get nodes anyway
                 if not records:
-                    # If no relationships found, get nodes anyway
                     cypher_query = """
                     MATCH (n)
-                    RETURN n, labels(n)[0] as n_type
+                    RETURN 
+                        n,
+                        labels(n) as n_labels,
+                        labels(n)[0] as n_type,
+                        properties(n) as n_props
                     LIMIT $limit
                     """
                     result = session.run(cypher_query, limit=limit)
                     records = list(result)
-                else:
-                    # Re-run the query to get all records
-                    result = session.run(cypher_query, limit=limit)
-                    records = list(result)
             
-            for record in result:
-                # Process source node
+            for record in records:
+                # Process source node with ALL properties from Neo4j
                 n = record['n']
-                n_type = record['n_type']
-                n_id = n.get('name') or n.get('title') or n.get('keyword') or str(n.id)
-                n_name = n.get('name') or n.get('title') or n.get('keyword') or 'Unknown'
+                n_type = record.get('n_type') or (record.get('n_labels')[0] if record.get('n_labels') else 'Unknown')
+                n_props = record.get('n_props', {})
+                
+                # Extract node ID from properties (name, title, keyword, or internal ID)
+                n_id = (n_props.get('name') or n_props.get('title') or n_props.get('keyword') or 
+                       n.get('name') or n.get('title') or n.get('keyword') or str(n.id))
+                n_name = (n_props.get('name') or n_props.get('title') or n_props.get('keyword') or
+                         n.get('name') or n.get('title') or n.get('keyword') or 'Unknown')
                 
                 if n_id not in node_map:
-                    # Determine node group for coloring
+                    # Determine node group for coloring based on Neo4j label
                     group = 1  # Default
                     if n_type == 'Speaker':
                         group = 2
@@ -551,22 +568,38 @@ async def get_graph_data(
                         group = 4
                     elif n_type == 'Category':
                         group = 5
+                    elif n_type == 'Organization':
+                        group = 6
+                    elif n_type == 'Product':
+                        group = 7
+                    elif n_type == 'Concept':
+                        group = 8
+                    elif n_type == 'Community':
+                        group = 9
                     
+                    # Create node with ALL properties from Neo4j
                     node_map[n_id] = {
                         'id': n_id,
                         'name': n_name,
                         'type': n_type,
                         'group': group,
-                        'value': 1
+                        'value': 1,
+                        # Include all Neo4j properties
+                        'properties': {k: v for k, v in n_props.items() if v is not None},
+                        'labels': record.get('n_labels', [n_type]) if 'n_labels' in record else [n_type]
                     }
                     nodes.append(node_map[n_id])
                 
                 # Process target node and relationship (if relationship exists)
                 if 'm' in record and record['m']:
                     m = record['m']
-                    m_type = record.get('m_type', 'Unknown')
-                    m_id = m.get('name') or m.get('title') or m.get('keyword') or str(m.id)
-                    m_name = m.get('name') or m.get('title') or m.get('keyword') or 'Unknown'
+                    m_type = record.get('m_type') or (record.get('m_labels')[0] if record.get('m_labels') else 'Unknown')
+                    m_props = record.get('m_props', {})
+                    
+                    m_id = (m_props.get('name') or m_props.get('title') or m_props.get('keyword') or
+                           m.get('name') or m.get('title') or m.get('keyword') or str(m.id))
+                    m_name = (m_props.get('name') or m_props.get('title') or m_props.get('keyword') or
+                             m.get('name') or m.get('title') or m.get('keyword') or 'Unknown')
                     
                     if m_id not in node_map:
                         group = 1
@@ -580,23 +613,31 @@ async def get_graph_data(
                             group = 4
                         elif m_type == 'Category':
                             group = 5
+                        elif m_type == 'Organization':
+                            group = 6
+                        elif m_type == 'Product':
+                            group = 7
+                        elif m_type == 'Concept':
+                            group = 8
+                        elif m_type == 'Community':
+                            group = 9
                         
                         node_map[m_id] = {
                             'id': m_id,
                             'name': m_name,
                             'type': m_type,
                             'group': group,
-                            'value': 1
+                            'value': 1,
+                            # Include all Neo4j properties
+                            'properties': {k: v for k, v in m_props.items() if v is not None},
+                            'labels': record.get('m_labels', [m_type]) if 'm_labels' in record else [m_type]
                         }
                         nodes.append(node_map[m_id])
                     
-                    # Add relationship if it exists
+                    # Add relationship with ALL properties from Neo4j
                     rel = record.get('r')
-                    rel_type = record.get('rel_type')  # Get from query result
-                    if not rel_type and rel:
-                        rel_type = rel.type if hasattr(rel, 'type') else 'RELATED_TO'
-                    if not rel_type:
-                        rel_type = 'RELATED_TO'
+                    rel_type = record.get('rel_type') or (rel.type if rel and hasattr(rel, 'type') else 'RELATED_TO')
+                    rel_props = record.get('rel_props', {})
                     
                     if rel or 'm' in record:  # Add link if relationship exists or target node exists
                         # Avoid duplicate links
@@ -608,8 +649,13 @@ async def get_graph_data(
                                 'target': m_id,
                                 'value': 1,
                                 'type': rel_type,
-                                'key': link_key
+                                'key': link_key,
+                                # Include all relationship properties from Neo4j
+                                'properties': {k: v for k, v in rel_props.items() if v is not None}
                             })
+                elif 'n' in record and 'm' not in record:
+                    # Handle case where we only have nodes (no relationships)
+                    pass
         
         driver.close()
         
