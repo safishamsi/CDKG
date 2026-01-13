@@ -550,10 +550,15 @@ async def get_graph_data(
                 n_props = record.get('n_props', {})
                 
                 # Extract node ID from properties (name, title, keyword, or internal ID)
-                n_id = (n_props.get('name') or n_props.get('title') or n_props.get('keyword') or 
-                       n.get('name') or n.get('title') or n.get('keyword') or str(n.id))
-                n_name = (n_props.get('name') or n_props.get('title') or n_props.get('keyword') or
-                         n.get('name') or n.get('title') or n.get('keyword') or 'Unknown')
+                # For Community nodes, use id from properties
+                if n_type == 'Community':
+                    n_id = str(n_props.get('id') or n.get('id') or n.id)
+                    n_name = f"Community {n_props.get('id') or n.get('id') or n.id}"
+                else:
+                    n_id = (n_props.get('name') or n_props.get('title') or n_props.get('keyword') or 
+                           n.get('name') or n.get('title') or n.get('keyword') or str(n.id))
+                    n_name = (n_props.get('name') or n_props.get('title') or n_props.get('keyword') or
+                             n.get('name') or n.get('title') or n.get('keyword') or f'{n_type} {str(n.id)}')
                 
                 if n_id not in node_map:
                     # Determine node group for coloring based on Neo4j label
@@ -597,10 +602,15 @@ async def get_graph_data(
                     m_type = record.get('m_type') or (record.get('m_labels')[0] if record.get('m_labels') else 'Unknown')
                     m_props = record.get('m_props', {})
                     
-                    m_id = (m_props.get('name') or m_props.get('title') or m_props.get('keyword') or
-                           m.get('name') or m.get('title') or m.get('keyword') or str(m.id))
-                    m_name = (m_props.get('name') or m_props.get('title') or m_props.get('keyword') or
-                             m.get('name') or m.get('title') or m.get('keyword') or 'Unknown')
+                    # For Community nodes, use id from properties
+                    if m_type == 'Community':
+                        m_id = str(m_props.get('id') or m.get('id') or m.id)
+                        m_name = f"Community {m_props.get('id') or m.get('id') or m.id}"
+                    else:
+                        m_id = (m_props.get('name') or m_props.get('title') or m_props.get('keyword') or
+                               m.get('name') or m.get('title') or m.get('keyword') or str(m.id))
+                        m_name = (m_props.get('name') or m_props.get('title') or m_props.get('keyword') or
+                                 m.get('name') or m.get('title') or m.get('keyword') or f'{m_type} {str(m.id)}')
                     
                     if m_id not in node_map:
                         group = 1
