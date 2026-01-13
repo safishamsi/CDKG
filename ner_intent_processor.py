@@ -10,8 +10,21 @@ This module provides:
 import re
 from typing import List, Dict, Optional, Tuple
 from collections import Counter
-import spacy
-from anthropic import Anthropic
+
+# Optional imports - make spacy optional
+try:
+    import spacy
+    SPACY_AVAILABLE = True
+except ImportError:
+    SPACY_AVAILABLE = False
+    print("⚠️  spaCy not available. NER features will be limited. Install with: pip install spacy && python -m spacy download en_core_web_sm")
+
+try:
+    from anthropic import Anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
+    print("⚠️  Anthropic not available. Intent recognition will be limited.")
 
 from config import config
 
@@ -27,28 +40,33 @@ class NERIntentProcessor:
     
     def _load_models(self):
         """Load spaCy and LLM models"""
-        try:
-            # Load spaCy model (use en_core_web_sm for NER)
-            print("   Loading spaCy NER model...")
+        if SPACY_AVAILABLE:
             try:
-                self.nlp = spacy.load("en_core_web_sm")
-            except OSError:
-                print("   ⚠️  spaCy model not found. Installing...")
-                import subprocess
-                subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
-                self.nlp = spacy.load("en_core_web_sm")
-            print("   ✅ spaCy model loaded")
-        except Exception as e:
-            print(f"   ⚠️  Could not load spaCy: {e}")
-            print("   Install with: pip install spacy && python -m spacy download en_core_web_sm")
+                # Load spaCy model (use en_core_web_sm for NER)
+                print("   Loading spaCy NER model...")
+                try:
+                    self.nlp = spacy.load("en_core_web_sm")
+                    print("   ✅ spaCy model loaded")
+                except OSError:
+                    print("   ⚠️  spaCy model not found. Run: python -m spacy download en_core_web_sm")
+                    self.nlp = None
+            except Exception as e:
+                print(f"   ⚠️  Could not load spaCy: {e}")
+                self.nlp = None
+        else:
+            print("   ⚠️  spaCy not installed - NER features disabled")
             self.nlp = None
         
         # Initialize LLM client
-        try:
-            self.llm_client = Anthropic(api_key=config.llm.api_key)
-            print("   ✅ LLM client initialized")
-        except Exception as e:
-            print(f"   ⚠️  Could not initialize LLM: {e}")
+        if ANTHROPIC_AVAILABLE:
+            try:
+                self.llm_client = Anthropic(api_key=config.llm.api_key)
+                print("   ✅ LLM client initialized")
+            except Exception as e:
+                print(f"   ⚠️  Could not initialize LLM: {e}")
+                self.llm_client = None
+        else:
+            print("   ⚠️  Anthropic not installed - Intent recognition disabled")
             self.llm_client = None
     
     def extract_entities(self, text: str) -> Dict[str, List[Dict]]:
