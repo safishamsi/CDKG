@@ -508,12 +508,22 @@ async def get_graph_data(
                 result = session.run(cypher_query, query=query, limit=limit)
             else:
                 # General graph: get a sample of nodes and relationships
-                cypher_query = f"""
+                # First try to get relationships, then fallback to just nodes
+                cypher_query = """
                 MATCH (n)-[r]->(m)
                 RETURN n, labels(n)[0] as n_type, r, m, labels(m)[0] as m_type
                 LIMIT $limit
                 """
                 result = session.run(cypher_query, limit=limit)
+                
+                # If no relationships found, get nodes anyway
+                if not result.peek():
+                    cypher_query = """
+                    MATCH (n)
+                    RETURN n, labels(n)[0] as n_type
+                    LIMIT $limit
+                    """
+                    result = session.run(cypher_query, limit=limit)
             
             for record in result:
                 # Process source node
@@ -545,7 +555,7 @@ async def get_graph_data(
                     }
                     nodes.append(node_map[n_id])
                 
-                # Process target node (if relationship exists)
+                # Process target node and relationship (if relationship exists)
                 if 'm' in record and record['m']:
                     m = record['m']
                     m_type = record.get('m_type', 'Unknown')
@@ -574,20 +584,21 @@ async def get_graph_data(
                         }
                         nodes.append(node_map[m_id])
                     
-                    # Add relationship
+                    # Add relationship if it exists
                     rel = record.get('r')
-                    rel_type = rel.type if rel else 'RELATED_TO'
-                    
-                    # Avoid duplicate links
-                    link_key = f"{n_id}->{m_id}"
-                    if not any(l.get('key') == link_key for l in links):
-                        links.append({
-                            'source': n_id,
-                            'target': m_id,
-                            'value': 1,
-                            'type': rel_type,
-                            'key': link_key
-                        })
+                    if rel:  # Only add link if relationship exists
+                        rel_type = rel.type if hasattr(rel, 'type') else 'RELATED_TO'
+                        
+                        # Avoid duplicate links
+                        link_key = f"{n_id}->{m_id}"
+                        if not any(l.get('key') == link_key for l in links):
+                            links.append({
+                                'source': n_id,
+                                'target': m_id,
+                                'value': 1,
+                                'type': rel_type,
+                                'key': link_key
+                            })
         
         driver.close()
         
