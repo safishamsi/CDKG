@@ -283,7 +283,7 @@ function GraphVisualization({ data, searchQuery = null }) {
               Reset & Reload
             </button>
           </div>
-        ) : displayData.nodes.length > 0 ? (
+        ) : (
           <ForceGraph2D
             ref={graphRef}
             graphData={displayData}
