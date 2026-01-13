@@ -73,19 +73,37 @@ function GraphVisualization({ data, searchQuery = null }) {
         
         if (result && result.nodes && result.nodes.length > 0) {
           // Enhance nodes with better properties
-          const enhancedNodes = result.nodes.map(node => ({
-            ...node,
-            // Calculate node size based on connections
-            connections: result.links.filter(
-              link => link.source === node.id || link.target === node.id
-            ).length,
-            // Ensure proper type
-            type: node.type || 'Unknown',
-            // Set color based on type
-            color: nodeTypeColors[node.type] || nodeTypeColors['default'],
-            // Set symbol
-            symbol: nodeTypeSymbols[node.type] || nodeTypeSymbols['default']
-          }))
+          const enhancedNodes = result.nodes.map(node => {
+            // Improve name display for nodes with "Unknown" or missing names
+            let displayName = node.name || node.id || 'Unknown'
+            if (displayName === 'Unknown' && node.properties) {
+              // Try to get a better name from properties
+              if (node.type === 'Community' && node.properties.id) {
+                displayName = `Community ${node.properties.id}`
+              } else if (node.properties.name) {
+                displayName = node.properties.name
+              } else if (node.properties.title) {
+                displayName = node.properties.title
+              } else if (node.properties.keyword) {
+                displayName = node.properties.keyword
+              }
+            }
+            
+            return {
+              ...node,
+              name: displayName, // Use improved name
+              // Calculate node size based on connections
+              connections: result.links.filter(
+                link => link.source === node.id || link.target === node.id
+              ).length,
+              // Ensure proper type
+              type: node.type || 'Unknown',
+              // Set color based on type
+              color: nodeTypeColors[node.type] || nodeTypeColors['default'],
+              // Set symbol
+              symbol: nodeTypeSymbols[node.type] || nodeTypeSymbols['default']
+            }
+          })
 
           setGraphData({
             nodes: enhancedNodes,
