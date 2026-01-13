@@ -60,8 +60,16 @@ function GraphVisualization({ data, searchQuery = null }) {
         } else if (searchTerm.trim()) {
           result = await getGraphData(searchTerm.trim(), 100, 2)
         } else {
-          result = await getGraphData(null, 150, 1)
+          result = await getGraphData(null, 50, 1)
         }
+        
+        console.log('📊 Graph API Response:', {
+          hasResult: !!result,
+          nodesCount: result?.nodes?.length || 0,
+          linksCount: result?.links?.length || 0,
+          totalNodes: result?.total_nodes,
+          totalLinks: result?.total_links
+        })
         
         if (result && result.nodes && result.nodes.length > 0) {
           // Enhance nodes with better properties
