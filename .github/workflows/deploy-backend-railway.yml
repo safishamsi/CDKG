@@ -31,11 +31,13 @@ jobs:
       - name: Install Railway CLI
         run: |
           curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
       
       - name: Deploy to Railway
         if: ${{ secrets.RAILWAY_TOKEN != '' }}
         run: |
           railway login --token ${{ secrets.RAILWAY_TOKEN }}
+          railway link ${{ secrets.RAILWAY_PROJECT_ID }}
           railway up --service ${{ secrets.RAILWAY_SERVICE || 'backend' }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
