@@ -33,9 +33,16 @@ jobs:
           curl -fsSL https://railway.app/install.sh | sh
       
       - name: Deploy to Railway
+        if: ${{ secrets.RAILWAY_TOKEN != '' }}
         run: |
-          railway up --service backend
+          railway login --token ${{ secrets.RAILWAY_TOKEN }}
+          railway up --service ${{ secrets.RAILWAY_SERVICE || 'backend' }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_SERVICE: backend
+      
+      - name: Skip Railway Deployment
+        if: ${{ secrets.RAILWAY_TOKEN == '' }}
+        run: |
+          echo "⚠️  RAILWAY_TOKEN secret not set. Skipping Railway deployment."
+          echo "To enable Railway deployment, add RAILWAY_TOKEN secret in GitHub repository settings."
 
