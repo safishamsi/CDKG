@@ -803,11 +803,6 @@ async def get_graph_around_node(
 @app.get("/api/stats")
 async def get_stats():
     """Get knowledge graph statistics"""
-    global rag_system
-    
-    if not rag_system:
-        raise HTTPException(status_code=503, detail="RAG system not initialized")
-    
     try:
         from neo4j import GraphDatabase
         from config import config
@@ -841,7 +836,8 @@ async def get_stats():
                 WHERE t.transcript IS NOT NULL
                 RETURN count(t) as count
             """)
-            transcript_count = result.single()['count']
+            transcript_record = result.single()
+            transcript_count = transcript_record['count'] if transcript_record else 0
             
             # Get YouTube videos
             result = session.run("""
@@ -849,14 +845,16 @@ async def get_stats():
                 WHERE t.youtube_id IS NOT NULL
                 RETURN count(t) as count
             """)
-            youtube_count = result.single()['count']
+            youtube_record = result.single()
+            youtube_count = youtube_record['count'] if youtube_record else 0
             
             # Get community count
             result = session.run("""
                 MATCH (c:Community)
                 RETURN count(c) as count
             """)
-            community_count = result.single()['count'] if result.single() else 0
+            community_record = result.single()
+            community_count = community_record['count'] if community_record else 0
         
         driver.close()
         
