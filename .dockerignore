@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build outputs
+dist/
+build/
+frontend/dist/
+frontend/build/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+*.log
+
+# Data & Large Files
+*.db
+*.sqlite
+*.npy
+*.bin
+embeddings/*.npy
+embeddings/*.bin
+
+# YouTube processing
+youtube_audio/
+youtube_downloads/
+youtube_transcripts/
+youtube_monitor_state.json
+
+# Git
+.git/
+.gitignore
+
+# Documentation (optional - keep if small)
+# *.md
+

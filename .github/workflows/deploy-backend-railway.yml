@@ -1,0 +1,41 @@
+name: Deploy Backend to Railway
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend_api_youtube.py'
+      - 'requirements_youtube.txt'
+      - 'youtube_processor.py'
+      - 'youtube_monitor.py'
+      - 'rag_system.py'
+      - 'langgraph_orchestrator.py'
+      - 'config.py'
+      - '.github/workflows/deploy-backend-railway.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+      
+      - name: Deploy to Railway
+        run: |
+          railway up --service backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_SERVICE: backend
+

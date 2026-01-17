@@ -84,7 +84,16 @@ python migrate_tags_to_properties.py
 
 - **GitHub**: https://github.com/safishamsi/CDKG
 - **Vercel** (if deployed): Check your Vercel dashboard
-- **Backend**: Needs to be running (local + ngrok or permanent host)
+- **Backend**: Deploy to Railway/Render (see `BACKEND_DEPLOYMENT.md`)
+
+## 🚀 Backend Deployment
+
+The backend can now be deployed via GitHub to:
+- **Railway.app** - See `.github/workflows/deploy-backend-railway.yml`
+- **Render.com** - See `.github/workflows/deploy-backend-render.yml`
+- **Docker** - See `Dockerfile` for containerized deployment
+
+**Full guide**: See `BACKEND_DEPLOYMENT.md` for complete instructions.
 
 ---
 

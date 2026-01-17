@@ -1,0 +1,56 @@
+name: Backend CI - Test & Build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'backend_api_youtube.py'
+      - 'requirements_youtube.txt'
+      - '**/*.py'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend_api_youtube.py'
+      - 'requirements_youtube.txt'
+      - '**/*.py'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements_youtube.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements_youtube.txt
+          python -m spacy download en_core_web_sm
+      
+      - name: Check imports
+        run: |
+          python -c "import backend_api_youtube; import youtube_processor; import rag_system; print('✅ All imports successful')"
+        continue-on-error: true
+      
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 backend_api_youtube.py youtube_processor.py --max-line-length=120 --ignore=E501,W503 || true
+        continue-on-error: true
+
