@@ -508,9 +508,11 @@ async def get_graph_data(
                 result = session.run(cypher_query, query=query, limit=limit)
             else:
                 # General graph: get ALL relationships and nodes from Neo4j
+                # Exclude Tag nodes (tags are now properties on Talk nodes, not separate nodes)
                 # Extract complete graph structure with all properties
                 cypher_query = """
                 MATCH (n)-[r]->(m)
+                WHERE NOT 'Tag' IN labels(n) AND NOT 'Tag' IN labels(m)
                 RETURN 
                     n, 
                     labels(n) as n_labels,
@@ -529,10 +531,11 @@ async def get_graph_data(
                 result = session.run(cypher_query, limit=limit)
                 records = list(result)
                 
-                # If no relationships found, get nodes anyway
+                # If no relationships found, get nodes anyway (excluding Tag nodes)
                 if not records:
                     cypher_query = """
                     MATCH (n)
+                    WHERE NOT 'Tag' IN labels(n)
                     RETURN 
                         n,
                         labels(n) as n_labels,
@@ -567,8 +570,6 @@ async def get_graph_data(
                         group = 2
                     elif n_type == 'Talk':
                         group = 3
-                    elif n_type == 'Tag':
-                        group = 1
                     elif n_type == 'Event':
                         group = 4
                     elif n_type == 'Category':
@@ -618,8 +619,6 @@ async def get_graph_data(
                             group = 2
                         elif m_type == 'Talk':
                             group = 3
-                        elif m_type == 'Tag':
-                            group = 1
                         elif m_type == 'Event':
                             group = 4
                         elif m_type == 'Category':
@@ -718,14 +717,16 @@ async def get_graph_around_node(
         node_map = {}
         
         with driver.session() as session:
-            # Find the center node and its neighbors
+            # Find the center node and its neighbors (excluding Tag nodes)
             cypher_query = f"""
             MATCH (center)
-            WHERE toLower(COALESCE(center.name, '')) = toLower($node_id)
+            WHERE (toLower(COALESCE(center.name, '')) = toLower($node_id)
                OR toLower(COALESCE(center.title, '')) = toLower($node_id)
-               OR toLower(COALESCE(center.keyword, '')) = toLower($node_id)
+               OR toLower(COALESCE(center.keyword, '')) = toLower($node_id))
+               AND NOT 'Tag' IN labels(center)
             WITH center
             MATCH path = (center)-[*1..{depth}]-(neighbor)
+            WHERE NOT 'Tag' IN labels(neighbor)
             RETURN DISTINCT
                 center,
                 labels(center)[0] as center_type,

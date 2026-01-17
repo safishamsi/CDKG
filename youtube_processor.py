@@ -304,8 +304,8 @@ class YouTubeVideoProcessor:
         
         self.connect_neo4j()
         
-        # Format tags
-        tags = video_info.get('tags', [])[:10]  # Limit to 10 tags
+        # Format tags as array (stored as property on Talk, not as separate nodes)
+        tags = [tag.strip().lower() for tag in video_info.get('tags', [])[:10] if tag and tag.strip()]
         
         # Store segments as JSON
         segments_json = json.dumps(segments) if segments else None
@@ -323,7 +323,7 @@ class YouTubeVideoProcessor:
         context_json = json.dumps(ner_data.get('context', {})) if ner_data else None
         
         with self.driver.session() as session:
-            # Create or merge Talk node
+            # Create or merge Talk node with tags as array property (not separate nodes)
             result = session.run("""
                 MERGE (t:Talk {title: $title})
                 SET t.description = $description,
@@ -340,6 +340,7 @@ class YouTubeVideoProcessor:
                     t.like_count = $like_count,
                     t.upload_date = $upload_date,
                     t.thumbnail = $thumbnail,
+                    t.tags = $tags,
                     t.entities = $entities,
                     t.key_concepts = $concepts,
                     t.intent = $intent,
@@ -361,6 +362,7 @@ class YouTubeVideoProcessor:
                 like_count=video_info.get('like_count', 0),
                 upload_date=upload_date,
                 thumbnail=video_info.get('thumbnail', ''),
+                tags=tags,  # Store as array property
                 entities=entities_json,
                 concepts=concepts_json,
                 intent=intent_json,
@@ -384,21 +386,9 @@ class YouTubeVideoProcessor:
                 )
                 print(f"   ✅ Linked speaker: {video_info['uploader']}")
             
-            # Create Tag nodes and relationships
-            for tag in tags:
-                if tag and tag.strip():
-                    session.run("""
-                        MERGE (tag:Tag {keyword: $tag})
-                        WITH tag
-                        MATCH (t:Talk {title: $title})
-                        MERGE (t)-[:IS_DESCRIBED_BY]->(tag)
-                    """,
-                        tag=tag.strip().lower(),
-                        title=video_info['title']
-                    )
-            
+            # Tags are now stored as property on Talk node (not separate nodes)
             if tags:
-                print(f"   ✅ Added {len(tags)} tags")
+                print(f"   ✅ Added {len(tags)} tags as Talk property")
             
             # Create entity nodes from NER results
             if ner_data and ner_data.get('entities'):

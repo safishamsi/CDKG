@@ -22,10 +22,10 @@ function GraphVisualization({ data, searchQuery = null }) {
   const [error, setError] = useState(null)
 
   // Node type color mapping based on Neo4j labels
+  // Note: Tag is no longer a node type - tags are stored as Talk.tags property
   const nodeTypeColors = {
     'Speaker': '#4a90e2',      // Blue
     'Talk': '#ff8c42',          // Orange
-    'Tag': '#228b22',           // Green
     'Event': '#9b59b6',          // Purple
     'Category': '#e74c3c',      // Red
     'Organization': '#3498db',  // Light Blue
@@ -39,7 +39,6 @@ function GraphVisualization({ data, searchQuery = null }) {
   const nodeTypeSymbols = {
     'Speaker': '👤',
     'Talk': '🎤',
-    'Tag': '🏷️',
     'Event': '📅',
     'Category': '📂',
     'Organization': '🏢',
