@@ -63,24 +63,37 @@ def migrate_tags():
             
             print(f"   ✅ Updated {updated_count} Talk nodes with tags property")
             
-            # Step 3: Delete IS_DESCRIBED_BY relationships
-            print("\n🗑️  Step 3: Deleting IS_DESCRIBED_BY relationships...")
+            # Step 3: Delete ALL relationships to/from Tag nodes (not just IS_DESCRIBED_BY)
+            print("\n🗑️  Step 3: Deleting ALL relationships to/from Tag nodes...")
+            result = session.run("""
+                MATCH (tag:Tag)-[r]-()
+                DELETE r
+                RETURN count(r) as deleted_count
+            """)
+            record = result.single()
+            deleted_rel = record['deleted_count'] if record else 0
+            print(f"   ✅ Deleted {deleted_rel} relationships to/from Tag nodes")
+            
+            # Also delete any remaining IS_DESCRIBED_BY relationships (in case direction is reversed)
             result = session.run("""
                 MATCH ()-[r:IS_DESCRIBED_BY]->(:Tag)
                 DELETE r
                 RETURN count(r) as deleted_count
             """)
-            deleted = result.single()['deleted_count']
-            print(f"   ✅ Deleted {deleted} IS_DESCRIBED_BY relationships")
+            record = result.single()
+            deleted_is_described = record['deleted_count'] if record else 0
+            if deleted_is_described > 0:
+                print(f"   ✅ Deleted {deleted_is_described} additional IS_DESCRIBED_BY relationships")
             
-            # Step 4: Delete Tag nodes (optional - comment out if you want to keep them)
-            print("\n🗑️  Step 4: Deleting Tag nodes...")
+            # Step 4: Delete Tag nodes using DETACH DELETE (removes all relationships automatically)
+            print("\n🗑️  Step 4: Deleting Tag nodes (with DETACH DELETE)...")
             result = session.run("""
                 MATCH (tag:Tag)
-                DELETE tag
+                DETACH DELETE tag
                 RETURN count(tag) as deleted_count
             """)
-            deleted = result.single()['deleted_count']
+            record = result.single()
+            deleted = record['deleted_count'] if record else 0
             print(f"   ✅ Deleted {deleted} Tag nodes")
             
             # Step 5: Verify migration
