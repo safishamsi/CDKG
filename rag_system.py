@@ -200,6 +200,16 @@ class RAGSystem:
         
         return connections
     
+    def _escape_cypher_string(self, text: str) -> str:
+        """
+        Escape special characters for Cypher string literals
+        Apostrophes need to be doubled: 'Ora Lassila's' -> 'Ora Lassila''s'
+        """
+        if not text:
+            return text
+        # Escape apostrophes by doubling them
+        return text.replace("'", "''")
+    
     def transcript_search(self, query: str, limit: int = 5) -> List[Dict]:
         """
         Search transcript content directly in Neo4j with timestamp support
@@ -222,20 +232,28 @@ class RAGSystem:
                    if len(word.strip(string.punctuation)) > 2 and word.lower().strip(string.punctuation) not in common_words]
         
         # Extract speaker names - look for consecutive capitalized words (likely names)
+        # Also handle possessive forms like "Ora Lassila's"
         speaker_candidates = []
         i = 0
         while i < len(words):
             if words[i][0].isupper() and len(words[i]) > 2 and words[i].lower() not in common_words:
                 # Check if next word is also capitalized (multi-word name)
                 if i + 1 < len(words) and words[i + 1][0].isupper() and len(words[i + 1]) > 2:
-                    # Multi-word name like "Paco Nathan"
-                    full_name = f"{words[i]} {words[i + 1]}"
+                    # Multi-word name like "Paco Nathan" or "Ora Lassila's"
+                    # Handle possessive: "Ora Lassila's" -> extract "Ora Lassila"
+                    next_word = words[i + 1]
+                    if next_word.endswith("'s") or next_word.endswith("'S"):
+                        # Remove possessive marker
+                        base_name = next_word[:-2]
+                        full_name = f"{words[i]} {base_name}"
+                    else:
+                        full_name = f"{words[i]} {words[i + 1]}"
                     speaker_candidates.append(full_name)
                     # Remove speaker name parts from keywords to avoid false matches
                     if words[i].lower() in keywords:
                         keywords.remove(words[i].lower())
-                    if words[i + 1].lower() in keywords:
-                        keywords.remove(words[i + 1].lower())
+                    if words[i + 1].lower().rstrip("'s") in keywords:
+                        keywords.remove(words[i + 1].lower().rstrip("'s"))
                     i += 2
                     continue
                 else:
@@ -246,21 +264,30 @@ class RAGSystem:
             i += 1
         
         with self.neo4j_driver.session() as session:
-            # Build a more comprehensive search query
+            # Build a more comprehensive search query using parameterized queries for safety
+            # Use parameters to avoid SQL injection and handle special characters
+            query_params = {
+                'search_query': query,
+                'limit': limit
+            }
+            
             if keywords:
+                # Escape keywords for safe use in query
+                escaped_keywords = [self._escape_cypher_string(kw) for kw in keywords]
                 # Search in transcript content
-                transcript_conditions = " OR ".join([f"toLower(t.transcript) CONTAINS '{kw}'" for kw in keywords])
+                transcript_conditions = " OR ".join([f"toLower(t.transcript) CONTAINS '{kw}'" for kw in escaped_keywords])
                 
                 # Also search for talk titles matching keywords
-                title_conditions = " OR ".join([f"toLower(t.title) CONTAINS '{kw}'" for kw in keywords])
+                title_conditions = " OR ".join([f"toLower(t.title) CONTAINS '{kw}'" for kw in escaped_keywords])
                 
                 # If we have speaker candidates, require BOTH speaker AND keyword match
                 if speaker_candidates:
-                    # Build speaker match conditions - try exact match first, then contains
+                    # Build speaker match conditions - escape names properly
                     speaker_conditions = []
                     for name in speaker_candidates:
-                        speaker_conditions.append(f"toLower(s.name) = toLower('{name}')")
-                        speaker_conditions.append(f"toLower(s.name) CONTAINS toLower('{name}')")
+                        escaped_name = self._escape_cypher_string(name)
+                        speaker_conditions.append(f"toLower(s.name) = toLower('{escaped_name}')")
+                        speaker_conditions.append(f"toLower(s.name) CONTAINS toLower('{escaped_name}')")
                     speaker_names_condition = " OR ".join(speaker_conditions)
                     
                     # Require talks by the speaker AND matching keywords
@@ -274,7 +301,8 @@ class RAGSystem:
                 # If no keywords, just filter by speaker if provided
                 speaker_filter = ""
                 if speaker_candidates:
-                    speaker_names_condition = " OR ".join([f"toLower(s.name) CONTAINS toLower('{name}')" for name in speaker_candidates])
+                    escaped_names = [self._escape_cypher_string(name) for name in speaker_candidates]
+                    speaker_names_condition = " OR ".join([f"toLower(s.name) CONTAINS toLower('{name}')" for name in escaped_names])
                     speaker_filter = f"""
                     AND EXISTS {{
                         MATCH (s:Speaker)-[:GIVES_TALK]->(t)
