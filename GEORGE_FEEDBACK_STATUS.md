@@ -88,23 +88,19 @@ NEO4J_PASSWORD=your_password
 
 ## ⚠️ **NEEDS DISCUSSION / ARCHITECTURAL DECISIONS**
 
-### 6. ⚠️ Domain Graph vs Lexical Graph
+### 6. ✅ Domain Graph vs Lexical Graph
 **George's Question**: "I'm wondering how the extraction works - it seems like there's only one (lexical) graph and no domain graph actually?"
 
-**Status**: ⚠️ **ARCHITECTURAL DECISION NEEDED**
+**Status**: ✅ **SINGLE GRAPH ACCEPTABLE**
+
+**Decision**: Single unified graph is acceptable - no need for separation.
 
 **Current State**:
 - ✅ Single unified graph in Neo4j
 - ✅ Mix of domain entities (Speaker, Talk, Event) and lexical entities (Organization, Product, Concept)
-- ✅ No separation between domain model and lexical extraction
+- ✅ Works well for current use case
 
-**What Would Be Needed** (if domain graph is required):
-1. Separate domain entities from lexical entities
-2. Create a mapping layer between them
-3. Query both graphs separately or with joins
-4. Architectural refactoring
-
-**Recommendation**: Discuss with George whether domain graph separation is needed, or if unified graph is acceptable.
+**No changes needed** - current architecture is fine.
 
 **Code Evidence**:
 - `youtube_processor.py` creates all node types in one graph
