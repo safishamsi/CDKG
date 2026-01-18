@@ -893,6 +893,8 @@ ANSWER STYLE:
 - Synthesize information from multiple sources (transcripts, graph connections, semantic matches) to provide comprehensive answers
 - Keep paragraphs short (2-3 sentences max)
 - Write confidently about what IS in the transcript, not what might be
+- ALWAYS cite sources: When mentioning information from a talk, include the talk title and speaker name (e.g., "As mentioned in [Talk Title] by [Speaker Name]...")
+- For transcript quotes, cite the source: "In [Talk Title], [Speaker Name] said: '[quote]'"
 
 Context:
 {context}

@@ -272,9 +272,14 @@ async def query(request: QueryRequest):
                 else:
                     timestamp_display = r.get('timestamp')
             
+            # Get speaker names from transcript result
+            speakers = r.get('speakers', [])
+            speaker_name = speakers[0] if speakers else None
+            
             source_entry = {
                 'type': 'transcript',
                 'title': title,
+                'speaker': speaker_name,
                 'timestamp': r.get('timestamp'),
                 'timestamp_seconds': r.get('timestamp_seconds'),
                 'timestamp_display': timestamp_display,

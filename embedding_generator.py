@@ -127,10 +127,11 @@ class EmbeddingGenerator:
                 if tags:
                     text += f". Tags: {', '.join(tags)}"
                 
-                # Include transcript content (first 2000 chars for embedding)
+                # Include transcript content (first 4000 chars for better semantic search)
                 # Full transcript is still searchable via Neo4j transcript_search
                 if transcript:
-                    transcript_snippet = transcript[:2000] + ("..." if len(transcript) > 2000 else "")
+                    # Use more transcript content for better semantic matching
+                    transcript_snippet = transcript[:4000] + ("..." if len(transcript) > 4000 else "")
                     text += f". Transcript: {transcript_snippet}"
                 
                 talks.append({
