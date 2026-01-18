@@ -711,6 +711,7 @@ class LangGraphOrchestrator:
                 'query': query,
                 'query_type': result.get('query_type'),
                 'answer': result.get('answer'),
+                'confidence': result.get('confidence'),
                 'context': result.get('context'),
                 'semantic_results': result.get('semantic_results', []),
                 'graph_results': result.get('graph_results', []),
