@@ -458,14 +458,46 @@ class LangGraphOrchestrator:
                             expanded_keywords.append(word.strip('.,!?;:'))
                 
                 # Also extract important nouns from previous answers (speaker names, talk titles, topics)
+                import re
                 for prev_answer in previous_answers:
-                    # Look for patterns like "Paco Nathan", "Graph Thinking", etc.
-                    import re
-                    # Find capitalized phrases (2-3 words)
+                    # Find capitalized phrases (2-3 words) - likely names/titles
                     capitalized_phrases = re.findall(r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,2}\b', prev_answer)
                     for phrase in capitalized_phrases:
                         if len(phrase.split()) >= 2:  # Multi-word phrases are likely names/titles
                             expanded_keywords.append(phrase)
+                    
+                    # Extract quoted text (often talk titles or important terms)
+                    quoted_text = re.findall(r'"([^"]+)"', prev_answer)
+                    expanded_keywords.extend(quoted_text)
+                    
+                    # Extract patterns like "by [Name]" or "in [Title]"
+                    by_pattern = re.findall(r'\bby\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)', prev_answer, re.IGNORECASE)
+                    in_pattern = re.findall(r'\bin\s+["\']?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)', prev_answer, re.IGNORECASE)
+                    expanded_keywords.extend(by_pattern)
+                    expanded_keywords.extend(in_pattern)
+                
+                # Resolve pronouns in the query
+                pronoun_resolutions = {}
+                if 'he ' in query_lower or ' he' in query_lower:
+                    # Find the most recent person mentioned
+                    for prev_answer in reversed(previous_answers):
+                        person_match = re.search(r'\b([A-Z][a-z]+\s+[A-Z][a-z]+)\b', prev_answer)
+                        if person_match:
+                            pronoun_resolutions['he'] = person_match.group(1)
+                            break
+                
+                if 'they ' in query_lower or ' they' in query_lower:
+                    # Find multiple people or organizations
+                    for prev_answer in reversed(previous_answers):
+                        people = re.findall(r'\b([A-Z][a-z]+\s+[A-Z][a-z]+)\b', prev_answer)
+                        if people:
+                            pronoun_resolutions['they'] = ' '.join(people[:2])
+                            break
+                
+                # Replace pronouns with resolved entities
+                for pronoun, resolution in pronoun_resolutions.items():
+                    expanded_query = expanded_query.replace(pronoun, resolution)
+                    expanded_query = expanded_query.replace(pronoun.capitalize(), resolution)
                 
                 # If we found keywords from history, add them to the query
                 if expanded_keywords:
@@ -474,12 +506,13 @@ class LangGraphOrchestrator:
                     unique_keywords = []
                     for kw in expanded_keywords:
                         kw_lower = kw.lower()
-                        if kw_lower not in seen:
+                        if kw_lower not in seen and len(kw.strip()) > 1:
                             seen.add(kw_lower)
                             unique_keywords.append(kw)
                     
-                    expanded_query = f"{expanded_query} {' '.join(unique_keywords[:5])}"  # Up to 5 keywords
-                    print(f"📝 Expanded follow-up query: {expanded_query}")
+                    if unique_keywords:
+                        expanded_query = f"{expanded_query} {' '.join(unique_keywords[:5])}"  # Up to 5 keywords
+                        print(f"📝 Expanded follow-up query: {expanded_query}")
             
             # 1. Semantic search (use expanded query)
             semantic = self.rag.semantic_search(expanded_query, k=5)
@@ -526,7 +559,7 @@ class LangGraphOrchestrator:
             return state
         
         def generate_answer_node(state: GraphState) -> GraphState:
-            """Generate final answer using all retrieved context"""
+            """Generate final answer using all retrieved context with confidence scoring"""
             # Format context (include all expected keys)
             retrieval_results = {
                 'semantic_results': state.get('semantic_results', []),
@@ -535,6 +568,10 @@ class LangGraphOrchestrator:
                 'transcript_results': state.get('transcript_results', []),
                 'multi_hop_paths': state.get('multi_hop_paths', [])
             }
+            
+            # Calculate confidence score based on retrieval quality
+            confidence = self._calculate_confidence(retrieval_results)
+            state['confidence'] = confidence
             
             context = self.rag.format_context(retrieval_results)
             state['context'] = context
@@ -547,6 +584,44 @@ class LangGraphOrchestrator:
             state['answer'] = answer
             
             return state
+        
+        def _calculate_confidence(self, retrieval_results: Dict) -> float:
+            """
+            Calculate confidence score based on retrieval quality
+            
+            Returns:
+                Confidence score between 0.0 and 1.0
+            """
+            confidence = 0.0
+            
+            # Semantic results contribute to confidence
+            semantic_results = retrieval_results.get('semantic_results', [])
+            if semantic_results:
+                # Average similarity score (normalized to 0-1)
+                avg_similarity = sum(r.get('similarity_score', 0) for r in semantic_results) / len(semantic_results)
+                confidence += avg_similarity * 0.3  # 30% weight
+            
+            # Transcript results indicate direct content match
+            transcript_results = retrieval_results.get('transcript_results', [])
+            if transcript_results:
+                # Having transcript results is a strong signal
+                confidence += 0.4  # 40% weight
+                # Bonus if multiple transcript results
+                if len(transcript_results) > 1:
+                    confidence += 0.1
+            
+            # Graph connections show relationship understanding
+            graph_results = retrieval_results.get('graph_connections', [])
+            if graph_results:
+                confidence += 0.2  # 20% weight
+            
+            # Multi-hop paths indicate complex reasoning capability
+            multi_hop = retrieval_results.get('multi_hop_paths', [])
+            if multi_hop:
+                confidence += 0.1  # 10% weight
+            
+            # Cap at 1.0
+            return min(confidence, 1.0)
         
         # Build graph
         workflow = StateGraph(GraphState)

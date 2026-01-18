@@ -71,7 +71,7 @@ class NERIntentProcessor:
     
     def extract_entities(self, text: str) -> Dict[str, List[Dict]]:
         """
-        Extract named entities from text using spaCy
+        Extract named entities from text using spaCy with improved filtering
         
         Args:
             text: Input text
@@ -88,21 +88,87 @@ class NERIntentProcessor:
         # Group entities by type
         entities_by_type = {}
         
+        # Common stop words and false positives to filter
+        stop_entities = {
+            'PERSON': ['I', 'You', 'We', 'They', 'He', 'She', 'It'],
+            'ORG': ['The', 'A', 'An'],
+            'PRODUCT': ['The', 'A', 'An']
+        }
+        
+        # Minimum length for entities (filter out single letters, very short names)
+        min_lengths = {
+            'PERSON': 2,
+            'ORG': 2,
+            'PRODUCT': 2,
+            'GPE': 2,
+            'EVENT': 3
+        }
+        
         for ent in doc.ents:
             entity_type = ent.label_
             entity_text = ent.text.strip()
             
+            # Filter out stop words
+            if entity_type in stop_entities and entity_text in stop_entities[entity_type]:
+                continue
+            
+            # Filter by minimum length
+            min_len = min_lengths.get(entity_type, 1)
+            if len(entity_text) < min_len:
+                continue
+            
+            # Filter out common false positives (single words that are too generic)
+            if entity_type == 'PERSON' and len(entity_text.split()) == 1:
+                # Single word person names should be at least 3 chars and capitalized
+                if len(entity_text) < 3 or not entity_text[0].isupper():
+                    continue
+            
+            # Normalize entity text (remove extra whitespace, fix casing)
+            entity_text = ' '.join(entity_text.split())
+            
+            # Skip if empty after normalization
+            if not entity_text:
+                continue
+            
             if entity_type not in entities_by_type:
                 entities_by_type[entity_type] = []
             
-            # Avoid duplicates
-            if entity_text not in [e['text'] for e in entities_by_type[entity_type]]:
+            # Avoid duplicates (case-insensitive)
+            existing_texts = [e['text'].lower() for e in entities_by_type[entity_type]]
+            if entity_text.lower() not in existing_texts:
                 entities_by_type[entity_type].append({
                     'text': entity_text,
                     'start': ent.start_char,
                     'end': ent.end_char,
-                    'label': entity_type
+                    'label': entity_type,
+                    'confidence': 1.0  # spaCy doesn't provide confidence, but we can add heuristics
                 })
+        
+        # Post-process: Merge similar entities (e.g., "IBM" and "IBM Corp")
+        for entity_type, entities in entities_by_type.items():
+            merged = []
+            seen = set()
+            for entity in entities:
+                text_lower = entity['text'].lower()
+                # Check if this is a substring or superstring of existing entity
+                is_duplicate = False
+                for seen_text in seen:
+                    if text_lower in seen_text or seen_text in text_lower:
+                        is_duplicate = True
+                        # Keep the longer version
+                        if len(text_lower) > len(seen_text):
+                            # Remove the shorter one and add this
+                            merged = [e for e in merged if e['text'].lower() != seen_text]
+                            seen.remove(seen_text)
+                            merged.append(entity)
+                            seen.add(text_lower)
+                        break
+                
+                if not is_duplicate:
+                    merged.append(entity)
+                    seen.add(text_lower)
+            
+            entities_by_type[entity_type] = merged
         
         return entities_by_type
     

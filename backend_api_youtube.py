@@ -74,6 +74,7 @@ class QueryResponse(BaseModel):
     query_type: Optional[str] = None
     retrieval_stats: Dict[str, int]
     sources: Optional[List[Dict[str, Any]]] = None
+    confidence: Optional[float] = None  # Confidence score 0.0-1.0
     error: Optional[str] = None
 
 
@@ -310,6 +311,9 @@ async def query(request: QueryRequest):
         answer = answer.replace(']-_', ' ')
         answer = ' '.join(answer.split())
         
+        # Get confidence score if available
+        confidence = result.get('confidence', None)
+        
         return QueryResponse(
             query=result.get('query', request.query),
             answer=answer,
@@ -320,7 +324,8 @@ async def query(request: QueryRequest):
                 'transcript': len(result.get('transcript_results', [])),
                 'multi_hop_paths': len(result.get('multi_hop_paths', []))
             },
-            sources=sources
+            sources=sources,
+            confidence=confidence
         )
     
     except Exception as e:
