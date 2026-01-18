@@ -305,9 +305,9 @@ class RAGEvaluator:
                     'confidence': confidence
                 }
                 
-                # Add to totals
+                # Add to totals (filter out None values)
                 for key in all_metrics:
-                    if key in metrics:
+                    if key in metrics and metrics[key] is not None:
                         all_metrics[key].append(metrics[key])
                 
                 results.append({
@@ -333,14 +333,17 @@ class RAGEvaluator:
                     'metrics': {}
                 })
         
-        # Calculate averages
+        # Calculate averages (only for non-empty lists)
         summary = {}
         for key, values in all_metrics.items():
-            if values:
-                summary[f'{key}_mean'] = np.mean(values)
-                summary[f'{key}_std'] = np.std(values)
-                summary[f'{key}_min'] = np.min(values)
-                summary[f'{key}_max'] = np.max(values)
+            if values and len(values) > 0:
+                # Filter out None values
+                valid_values = [v for v in values if v is not None]
+                if valid_values:
+                    summary[f'{key}_mean'] = np.mean(valid_values)
+                    summary[f'{key}_std'] = np.std(valid_values)
+                    summary[f'{key}_min'] = np.min(valid_values)
+                    summary[f'{key}_max'] = np.max(valid_values)
         
         return {
             'summary': summary,

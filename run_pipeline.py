@@ -17,6 +17,7 @@ from transcript_processor import process_transcripts
 from embedding_generator import EmbeddingGenerator
 from vector_store import VectorStore
 from rag_system import RAGSystem
+from evaluate_rag import RAGEvaluator
 
 
 def run_step(step_name: str, step_func, *args, **kwargs):
@@ -95,6 +96,33 @@ def step_4_test_rag():
     return result
 
 
+def step_5_evaluate_rag():
+    """Step 5: Evaluate RAG system with NDCG and other metrics"""
+    evaluator = RAGEvaluator()
+    
+    try:
+        # Load QA dataset
+        qa_pairs = evaluator.load_qa_dataset()
+        
+        # Run evaluation
+        results = evaluator.evaluate(qa_pairs, verbose=True)
+        
+        # Print report
+        evaluator.print_report(results)
+        
+        # Save results
+        import json
+        from pathlib import Path
+        output_file = Path("evaluation_results.json")
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+        print(f"\n💾 Results saved to: {output_file}")
+        
+        return results
+    finally:
+        evaluator.close()
+
+
 def main():
     """Run complete pipeline"""
     print("=" * 70)
@@ -103,9 +131,10 @@ def main():
     print("\nThis will run all steps:")
     print("  1. Load data into Neo4j")
     print("  1.5. Process transcripts and load into Neo4j")
-    print("  2. Generate embeddings (including transcript content)")
+    print("  2. Generate embeddings (including transcript content - 4000 chars)")
     print("  3. Build vector store")
     print("  4. Test RAG system")
+    print("  5. Evaluate RAG system (NDCG, semantic similarity, ROUGE, etc.)")
     print()
     
     # Ask for confirmation
@@ -123,6 +152,7 @@ def main():
         ("Generate Embeddings", step_2_generate_embeddings),
         ("Build Vector Store", step_3_build_vector_store),
         ("Test RAG System", step_4_test_rag),
+        ("Evaluate RAG System", step_5_evaluate_rag),
     ]
     
     results = []
